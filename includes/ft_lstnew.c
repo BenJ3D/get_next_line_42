@@ -1,37 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/25 18:33:21 by bducrocq          #+#    #+#             */
-/*   Updated: 2021/11/25 19:40:39 by bducrocq         ###   ########.fr       */
+/*   Created: 2021/11/22 11:43:51 by bducrocq          #+#    #+#             */
+/*   Updated: 2021/11/22 16:16:54 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "../libft/libft.h"
-#include "get_next_line.h"
+#include "libft.h"
 
-char	*ft_strjoin_gnl(char const *s1, char const *s2)
+t_list	*ft_lstnew(void *content)
 {
-	size_t	i;
-	size_t	j;
-	char	*str;
+	t_list	*tmp;
 
-	if (!s1)
-		return (0);
-	str = ft_calloc((ft_strlen(s1) + ft_strlen(s2) + 1), sizeof(char));
-	if (!str)
+	tmp = (t_list *)malloc(sizeof(*tmp));
+	if (!tmp)
 		return (NULL);
-	i = 0;
-	j = 0;
-	while (s1[i])
-		str[j++] = s1[i++];
-	i = 0;
-	while (s2[i])
-		str[j++] = s2[i++];
-	str[j] = '\0';
-	free(*s2);
-	return (str);
+	tmp->content = content;
+	tmp->next = NULL;
+	return (tmp);
 }

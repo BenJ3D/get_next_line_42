@@ -6,39 +6,39 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 20:00:04 by bducrocq          #+#    #+#             */
-/*   Updated: 2021/11/25 17:56:06 by bducrocq         ###   ########.fr       */
+/*   Updated: 2021/11/25 19:38:53 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/libft.h"
+// #include "../libft/libft.h"
 #include "get_next_line.h"
-#define BUFFER_SIZE 12
+#define BUFFER_SIZE 13
 
 char	*get_next_line(int fd)
 {	
 	int			ret;
-	static char	buffer[BUFFER_SIZE + 1];
+	static char	*buf[BUFFER_SIZE + 1];
+	char		*tmp;
 
-	ret = read(fd, buffer, BUFFER_SIZE);
-	buffer[ret] = '\0';
-	return (buffer);
+	// if (!buf)
+	// 	*buf = NULL;
+	ret = read(fd, buf, BUFFER_SIZE);
+	buf[ret] = '\0';
+	tmp = ft_strdup("");
+	tmp = ft_strjoin_gnl(buf, tmp);
+	return (buf);
 }
 
 int	main(void)
 {
 	int		fd;
-	//int		ret;
-	//char	buffer[BUFFER_SIZE + 1];
-	char	path[] = "./42";
 
+	char	path[] = "./42";
 	fd = open(path, O_RDONLY);
 		printf("BUFFER_SIZE = : %d\n", BUFFER_SIZE);
 		printf("fd : %d\n\n\n", fd);
-	// ret = read(fd, buffer, BUFFER_SIZE);
-	// buffer[ret] = '\0';
 		
 		printf("%s\n", get_next_line(fd));
-		//printf("%s\n", buffer);
 
 	return (0);
 }	
@@ -46,4 +46,4 @@ int	main(void)
 
 
 
-//ret = read(fd, buffer, BUFFER_SIZE);
+//ret = read(fd, buf, BUFFER_SIZE);

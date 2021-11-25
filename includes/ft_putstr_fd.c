@@ -1,37 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/25 18:33:21 by bducrocq          #+#    #+#             */
-/*   Updated: 2021/11/25 19:40:39 by bducrocq         ###   ########.fr       */
+/*   Created: 2021/11/20 18:07:23 by bducrocq          #+#    #+#             */
+/*   Updated: 2021/11/20 18:18:39 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "../libft/libft.h"
-#include "get_next_line.h"
+#include "libft.h"
 
-char	*ft_strjoin_gnl(char const *s1, char const *s2)
+void	ft_putstr_fd(char *s, int fd)
 {
-	size_t	i;
-	size_t	j;
-	char	*str;
+	int		i;
 
-	if (!s1)
-		return (0);
-	str = ft_calloc((ft_strlen(s1) + ft_strlen(s2) + 1), sizeof(char));
-	if (!str)
-		return (NULL);
 	i = 0;
-	j = 0;
-	while (s1[i])
-		str[j++] = s1[i++];
-	i = 0;
-	while (s2[i])
-		str[j++] = s2[i++];
-	str[j] = '\0';
-	free(*s2);
-	return (str);
+	if (s)
+		while (s[i])
+			write(fd, &s[i++], 1);
 }

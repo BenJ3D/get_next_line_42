@@ -1,37 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/25 18:33:21 by bducrocq          #+#    #+#             */
-/*   Updated: 2021/11/25 19:40:39 by bducrocq         ###   ########.fr       */
+/*   Created: 2021/11/20 16:58:07 by bducrocq          #+#    #+#             */
+/*   Updated: 2021/11/20 17:26:46 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "../libft/libft.h"
-#include "get_next_line.h"
+#include "libft.h"
 
-char	*ft_strjoin_gnl(char const *s1, char const *s2)
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	size_t	i;
-	size_t	j;
-	char	*str;
+	char	*sptr;
+	int		i;
 
-	if (!s1)
-		return (0);
-	str = ft_calloc((ft_strlen(s1) + ft_strlen(s2) + 1), sizeof(char));
-	if (!str)
+	if (!s || !f)
+		return (NULL);
+	sptr = (char *)malloc(sizeof(char) * (ft_strlen(s) + 1));
+	if (!sptr)
 		return (NULL);
 	i = 0;
-	j = 0;
-	while (s1[i])
-		str[j++] = s1[i++];
-	i = 0;
-	while (s2[i])
-		str[j++] = s2[i++];
-	str[j] = '\0';
-	free(*s2);
-	return (str);
+	while (s[i])
+	{
+		sptr[i] = f(i, s[i]);
+		++i;
+	}
+	sptr[i] = '\0';
+	return (sptr);
 }
