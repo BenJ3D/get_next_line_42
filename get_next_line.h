@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: benasusmac <benasusmac@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 19:56:31 by bducrocq          #+#    #+#             */
-/*   Updated: 2021/11/29 14:15:25 by bducrocq         ###   ########.fr       */
+/*   Updated: 2021/12/02 00:32:29 by benasusmac       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H 
+# define BUFFER_SIZE 60
 # include <string.h>
 # include <stdlib.h>
 # include <unistd.h>
