@@ -1,5 +1,34 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/02 17:31:54 by bducrocq          #+#    #+#             */
+/*   Updated: 2021/12/02 18:10:52 by bducrocq         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
+// int	main(void)
+// {
+// 	char	str[] = "Mon Ami Est Un Genie\nJules Delavigne";
+// 	char	str2[100];
+// 	int	i;
+
+// 	i = 0;
+// 	while (str[i] != '\n')
+// 		i++;
+
+// 	printf("%s\n", &str[i]);
+// 	printf("%zu\n", ft_strlen(str));
+
+// 	printf("%zu\n", ft_strlen(&str[i]));
+
+// 	return (0);
+// }	
 
 int	main(void)
 {
@@ -8,7 +37,6 @@ int	main(void)
     static char    *buff;
     int     ret;
     char temp[BUFFER_SIZE + 1];
-
 
 	// char	test2[] = " les coupains";
 	// char	test[] = "coucou";
