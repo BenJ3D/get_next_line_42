@@ -13,12 +13,13 @@
 // #include "../libft/libft.h"
 #include "get_next_line.h"
 
-char	*ft_strjoin_gnl(char *s1, char *s2)
+char	*ft_strjoin_gnl(char *s1, char *s2, int buf_end)
 {
 	size_t	i;
 	size_t	j;
 	char	*str;
 
+	s2[buf_end] = '\0';
 	if (!s1)
 		return (0);
 	str = ft_calloc((ft_strlen(s1) + ft_strlen(s2) + 1), sizeof(char));
