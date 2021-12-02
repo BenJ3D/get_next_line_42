@@ -23,16 +23,7 @@ int	main(void)
 
 	printf("1er appel :\n%s\n\n", get_next_line(fd));
 	printf("2nd appel :\n%s\n\n", get_next_line(fd));
-	printf("3me appel :\n%s\n", get_next_line(fd));
-	printf("4me appel :\n%s\n", get_next_line(fd));
-//     temp = ft_strdup("");
-//     buff = ft_strdup("");
-//     ret = read(fd, buff, BUFFER_SIZE);
-//     printf("1 : %s\n", buff);
-//     temp = ft_strjoin(buff + ret, temp);
-//      read(fd, buff, BUFFER_SIZE);
-//    printf("2 : %s ; %s \n", buff, temp);
-//       read(fd, buff, BUFFER_SIZE);
-//     printf("3 : %s\n", buff);
+	// printf("3me appel :\n%s\n", get_next_line(fd));
+	// printf("4me appel :\n%s\n", get_next_line(fd));
 	return (0);
 }	
