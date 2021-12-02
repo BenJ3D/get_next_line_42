@@ -22,9 +22,9 @@ int	main(void)
 	//printf("debugg ===>>%s\n\n", ft_strjoin_gnl(test, test2));
 
 	printf("1er appel :\n%s\n\n", get_next_line(fd));
-	// printf("2nd appel :\n%s\n\n", get_next_line(fd));
-	// printf("3me appel :\n%s\n", get_next_line(fd));
-	// printf("4me appel :\n%s\n", get_next_line(fd));
+	printf("2nd appel :\n%s\n\n", get_next_line(fd));
+	printf("3me appel :\n%s\n", get_next_line(fd));
+	printf("4me appel :\n%s\n", get_next_line(fd));
 //     temp = ft_strdup("");
 //     buff = ft_strdup("");
 //     ret = read(fd, buff, BUFFER_SIZE);

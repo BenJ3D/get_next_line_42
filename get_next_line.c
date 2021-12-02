@@ -21,45 +21,59 @@
 char	*get_next_line(int fd)
 {	
 	size_t		ret;
-	static char		buf[BUFFER_SIZE + 1];
+	char	buf[BUFFER_SIZE + 1];
 	size_t		i;
 	char		*tmp;
 	int			bool;
 	int			j;
 
 	i = 0;
-	j = 1;
+	j = 0;
 	bool = 0;
 	tmp = ft_strdup("");
-	ret = read(fd, buf, BUFFER_SIZE);
-	printf ("buf : %s\n", buf);
-	while (j > 0)
+	buf[0] = 'A';
+	printf ("buf init: %s\n", buf);
+	while (1)
 	{
+		ret = read(fd, buf, BUFFER_SIZE);
+		printf ("buf : %s\n", buf);
 		i = 0;
 		while (i < ret)
 		{
-			if (buf[i] == '\n' || i == ret)
+			if (buf[i] == '\n')
 			{
 				bool = 1;
-				buf[i + 1] = '\0';
+				buf[i] = '\0';
 				tmp = ft_strjoin_gnl(tmp, buf);
+				printf("bool = %d\n", bool);
+				printf("tmp = %s\n", tmp);
 				return (tmp);
 				break ;
 			}
-			//printf(" %c : %d\n", buf[i], bool);
+			if (i == ret)
+			{
+				tmp = ft_strjoin_gnl(tmp, buf);
+				printf("bool = %d\n", bool);
+				printf("tmp = %s\n", tmp);
+				return (tmp);
+				break ;
+			} // printf("i = %zu\n", i);
 			i++;
 		}
-		//printf("bool = %d \n", bool);
-		if (bool != 1)
+		if (bool == 1) // si \n trouvé
 		{
-		tmp = ft_strjoin_gnl(tmp, buf);
-		// ret = read(fd, buf, BUFFER_SIZE);
-		i = 0;
-		j++;
+			printf("tmp = %s\n", tmp);
+			tmp = ft_strjoin_gnl(tmp, buf);
+			printf("tmp = %s\n", tmp);
+			return (tmp);
+			i = 0;
 		}
+	tmp = ft_strjoin_gnl(tmp, buf);
+		bool = 0;
+		printf("j = %d\n", j);
+		j++;
 	}
 	tmp = ft_strjoin_gnl(tmp, buf);
-	//tmp = ft_strjoin_gnl(tmp, "coucou");
 	return (tmp);
 }
 

@@ -12,7 +12,7 @@
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H 
-# define BUFFER_SIZE 60
+# define BUFFER_SIZE 3
 # include <string.h>
 # include <stdlib.h>
 # include <unistd.h>

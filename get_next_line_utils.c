@@ -32,6 +32,6 @@ char	*ft_strjoin_gnl(char *s1, char *s2)
 	while (s2[i])
 		str[j++] = s2[i++];
 	str[j] = '\0';
-	//free(s2);
+	free(s1);
 	return (str);
 }
