@@ -6,25 +6,28 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 20:00:04 by bducrocq          #+#    #+#             */
-/*   Updated: 2021/12/02 19:04:20 by bducrocq         ###   ########.fr       */
+/*   Updated: 2021/12/03 12:04:52 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 //#include "../libft/libft.h"
 #include "get_next_line.h"
 
-static char	*ft_copy_after_n(char *str)
+static char	*ft_copy_after_n(char *str) //// !!!!!!!!!!!!!
 {
 	int			i;
-	static char	cpy[BUFFER_SIZE];
+	int			len;
+	char	*cpy;
 
-	//cpy = ft_strdup("");
+	len = ft_strlen(&str[i]);
 	if (!str)
-		return (cpy);
+		return (NULL);
+	cpy = malloc((len + 1) * sizeof(char));
 	i = 0;
-	while (str[i] != '\n' || i < ft_strlen(str))
+	while (str[i] != '\n')
 		i++;
-	ft_memcpy(cpy, &str[i], ft_strlen(&str[i]));
+	ft_strlcpy(cpy, &str[i], len);
+	cpy[len] = '\0';
 	return (cpy);
 }
 
@@ -50,7 +53,7 @@ char	*get_next_line(int fd)
 		return (tmp);
 	}
 	
-	while (1)   // boucle principale, decoupe au premier \n
+	while (1/*&& after_n == NULL*/)   // boucle principale, decoupe au premier \n
 	{
 		ret = read(fd, buf, BUFFER_SIZE);
 		buf[ret] = '\0';
@@ -58,7 +61,7 @@ char	*get_next_line(int fd)
 		printf("\nRESTANT :%s\n", after_n);
 		printf ("\nBUFFER :%s\n", buf);
 		i = 0;
-		while (i <= ret)
+		while (i <= ret && after_n != NULL)
 		{
 			if (buf[i] == '\n')
 			{

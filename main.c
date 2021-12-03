@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 17:31:54 by bducrocq          #+#    #+#             */
-/*   Updated: 2021/12/02 18:10:52 by bducrocq         ###   ########.fr       */
+/*   Updated: 2021/12/03 11:59:44 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	main(void)
 	//printf("debugg ===>>%s\n\n", ft_strjoin_gnl(test, test2));
 
 	printf("1er appel :\n%s\n\n", get_next_line(fd));
-	printf("2nd appel :\n%s\n\n", get_next_line(fd));
+	//printf("2nd appel :\n%s\n\n", get_next_line(fd));
 	// printf("3me appel :\n%s\n", get_next_line(fd));
 	// printf("4me appel :\n%s\n", get_next_line(fd));
 	return (0);
