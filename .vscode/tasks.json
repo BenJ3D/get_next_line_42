@@ -6,7 +6,8 @@
             "command": "gcc",
             "args": [
                 "*.c",
-                "./includes/libft.a"
+                "./includes/libft.a",
+                "-g"
             ],
             "isShellCommand": true,
         }

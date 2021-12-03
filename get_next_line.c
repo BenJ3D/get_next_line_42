@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 20:00:04 by bducrocq          #+#    #+#             */
-/*   Updated: 2021/12/03 12:04:52 by bducrocq         ###   ########.fr       */
+/*   Updated: 2021/12/03 17:35:59 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,39 +15,43 @@
 
 static char	*ft_copy_after_n(char *str) //// !!!!!!!!!!!!!
 {
-	int			i;
-	int			len;
+	static int		i;
+	int		len;
 	char	*cpy;
 
 	len = ft_strlen(&str[i]);
 	if (!str)
 		return (NULL);
 	cpy = malloc((len + 1) * sizeof(char));
+	if (!cpy)
+		return (0);
 	i = 0;
 	while (str[i] != '\n')
+		i++;
+	if (str[i + 1] != '\0')
 		i++;
 	ft_strlcpy(cpy, &str[i], len);
 	cpy[len] = '\0';
 	return (cpy);
 }
-
 char	*get_next_line(int fd)
 {	
 	size_t			ret;
 	char			buf[BUFFER_SIZE + 1];
 	size_t			i;
-	char			*tmp;
+	static char		*tmp = NULL;
 	int				bool;
 	static char		*after_n = NULL;
 
 	i = 0;
 	bool = 0;
-	tmp = ft_strdup("");
+	if (!tmp)
+		tmp = ft_strdup("");
 	ft_bzero(buf, BUFFER_SIZE);
 	printf ("buf init: %s\n", buf);
 	if (after_n != NULL)
 	{
-		tmp = ft_strjoin_gnl(tmp, after_n, i);
+		tmp = ft_strjoin_gnl(after_n, tmp, i);
 		after_n = ft_copy_after_n(tmp);
 		printf("\nRESTANT after1:%s\n", after_n);
 		return (tmp);
@@ -66,6 +70,7 @@ char	*get_next_line(int fd)
 			if (buf[i] == '\n')
 			{
 				bool = 1;
+				i++;
 				tmp = ft_strjoin_gnl(tmp, buf, i);
 				printf("tmp = %s\n", tmp);
 				return (tmp);
