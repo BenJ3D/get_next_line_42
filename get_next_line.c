@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 20:00:04 by bducrocq          #+#    #+#             */
-/*   Updated: 2021/12/03 12:04:52 by bducrocq         ###   ########.fr       */
+/*   Updated: 2021/12/03 13:17:03 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,46 +53,22 @@ char	*get_next_line(int fd)
 		return (tmp);
 	}
 	
-	while (1/*&& after_n == NULL*/)   // boucle principale, decoupe au premier \n
+	while (1)   // boucle principale, decoupe au premier \n
 	{
 		ret = read(fd, buf, BUFFER_SIZE);
 		buf[ret] = '\0';
-		after_n = ft_copy_after_n(buf);
+		//after_n = ft_copy_after_n(buf);
 		printf("\nRESTANT :%s\n", after_n);
 		printf ("\nBUFFER :%s\n", buf);
 		i = 0;
-		while (i <= ret && after_n != NULL)
-		{
-			if (buf[i] == '\n')
-			{
-				bool = 1;
-				tmp = ft_strjoin_gnl(tmp, buf, i);
-				printf("tmp = %s\n", tmp);
-				return (tmp);
-				break ;
-			}
-			if (i == ret)
-			{
-				tmp = ft_strjoin_gnl(tmp, buf, i);
-				printf("tmp = %s\n", tmp);
-				return (tmp);
-				break ;
-			}
-			i++;
-		}
-		if (bool == 1) // si \n trouvé
-		{
-			printf("tmp = %s\n", tmp);
-			tmp = ft_strjoin_gnl(tmp, buf, i);
-			printf("tmp = %s\n", tmp);
-			ft_copy_after_n(tmp);
-			return (tmp);
-			i = 0;
-		}
-		tmp = ft_strjoin_gnl(tmp, buf, i);
-		bool = 0;
+		// parcourir le buf et cherche un \n
+		////ft_bufchr << buf >> return 0 si pas de \n ou return la position du \n
+		// si 0 : on join buf et tmp et reboucle
+		// si >1 :  puis 
+		//// on save dans une static le restant
+		////on join jusqu au \n
+		//// return tmp
 	}
-
 
 	tmp = ft_strjoin_gnl(tmp, buf, i);
 	return (tmp);
