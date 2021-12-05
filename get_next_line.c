@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 20:00:04 by bducrocq          #+#    #+#             */
-/*   Updated: 2021/12/03 17:35:59 by bducrocq         ###   ########.fr       */
+/*   Updated: 2021/12/05 20:16:57 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 //#include "../libft/libft.h"
 #include "get_next_line.h"
 
-static char	*ft_copy_after_n(char *str) //// !!!!!!!!!!!!!
+static char	*ft_copy_after_n(char *str) //// !!!!!!!!!!!!
 {
 	static int		i;
 	int		len;
