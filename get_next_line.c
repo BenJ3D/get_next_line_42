@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 20:00:04 by bducrocq          #+#    #+#             */
-/*   Updated: 2021/12/06 14:02:47 by bducrocq         ###   ########.fr       */
+/*   Updated: 2021/12/06 15:04:51 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,17 +57,19 @@ char	*get_next_line(int fd)
 		printf("\nRESTANT after1:%s\n", after_n);
 		return (tmp);
 	}
-	
 	while (1/*&& after_n == NULL*/)   // boucle principale, decoupe au premier \n
 	{
-		ret = read(fd, buf, BUFFER_SIZE);
-		buf[ret] = '\0';
+		if (ft_strchr(after_n, '\n'))
+			buf = ft_copy_after_n(after_n);
+		if (!ft_strchr(after_n, '\n'))
+		{
+			ret = read(fd, buf, BUFFER_SIZE);
+			buf[ret] = '\0';
+		}
 		after_n = ft_copy_after_n(buf);
 		printf("\nRESTANT :%s\n", after_n);
 		printf ("\nBUFFER :%s\n", buf);
 		i = 0;
-		if (after_n != NULL)
-			after_n = ft_copy_after_n(after_n);
 		while (i <= ret && after_n != NULL)
 		{
 			if (buf[i] == '\n')
@@ -112,7 +114,7 @@ static char	*manage_n(char *str)
 	char	*tmp2;
 
 	i = 0;
-	tmp2 = ft_calloc(BUFFER_SIZE * sizeof(char));
+	tmp2 = ft_calloc(BUFFER_SIZE, sizeof(char));
 	while (str[i])
 	{
 		if (str[i] ==  '\n')
@@ -124,18 +126,17 @@ static char	*manage_n(char *str)
 	return (tmp2);
 }
 
-
 // if (read(fd, buf, 0) < 0)
-//         return (NULL);
-//     while (!ft_strchr(str, '\n') && i != 0)
-//     {
-//         i = read(fd, buf, BUFFER_SIZE);
-//         if (i < 0)
-//             return (0);
-//         buf[i] = '\0';
-//         str = ft_strjoin(str, buf);
-//         if (!str)
-//             return (0);
-//     }
-//     if (ft_strchr(str, '\n'))
-//         return (extract_nl(&str));
+// 		return (NULL);
+// 	while (!ft_strchr(str, '\n') && i != 0)
+// 	{
+// 		i = read(fd, buf, BUFFER_SIZE);
+// 		if (i < 0)
+// 			return (0);
+// 		buf[i] = '\0';
+// 		str = ft_strjoin(str, buf);
+// 		if (!str)
+// 			return (0);
+// 	}
+// 	if (ft_strchr(str, '\n'))
+// 		return (extract_nl(&str));
