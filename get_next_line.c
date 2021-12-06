@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 20:00:04 by bducrocq          #+#    #+#             */
-/*   Updated: 2021/12/03 15:38:08 by bducrocq         ###   ########.fr       */
+/*   Updated: 2021/12/06 12:24:22 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,12 @@ char	*get_next_line(int fd)
 	char			buf[BUFFER_SIZE + 1];
 	size_t			i;
 	char			*tmp;
-	int				bool;
+	//int				bool;
 	static char		*after_n = NULL;
 
 	i = 0;
-	bool = 0;
-	tmp = ft_strdup("");
+	// bool = 0;
+	tmp = ft_strdup(""); // init 
 	ft_bzero(buf, BUFFER_SIZE);
 	printf ("buf init: %s\n", buf);
 	if (after_n != NULL)
@@ -56,7 +56,7 @@ char	*get_next_line(int fd)
 	while (1)   // boucle principale, decoupe au premier \n
 	{
 		//si after != NULL
-		///cpy jusqu'au 
+		///cpy jusqu'au \n
 		
 		//lis le fichier si aftern est vide
 		///>>
@@ -76,3 +76,5 @@ char	*get_next_line(int fd)
 	tmp = ft_strjoin_gnl(tmp, buf, i);
 	return (tmp);
 }
+
+char
