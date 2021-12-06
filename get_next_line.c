@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 20:00:04 by bducrocq          #+#    #+#             */
-/*   Updated: 2021/12/06 12:20:10 by bducrocq         ###   ########.fr       */
+/*   Updated: 2021/12/06 13:06:07 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,11 @@ char	*get_next_line(int fd)
 	size_t			ret;
 	char			buf[BUFFER_SIZE + 1];
 	size_t			i;
-	char		*tmp = NULL;
+	char			*tmp = NULL;
 	int				bool;
 	static char		*after_n = NULL;
 
+	printf ("%s\n", after_n);
 	i = 0;
 	bool = 0;
 	if (!tmp)
@@ -65,6 +66,8 @@ char	*get_next_line(int fd)
 		printf("\nRESTANT :%s\n", after_n);
 		printf ("\nBUFFER :%s\n", buf);
 		i = 0;
+		if (after_n != NULL)
+			after_n = ft_copy_after_n(after_n);
 		while (i <= ret && after_n != NULL)
 		{
 			if (buf[i] == '\n')
@@ -101,4 +104,22 @@ char	*get_next_line(int fd)
 
 	tmp = ft_strjoin_gnl(tmp, buf, i);
 	return (tmp);
+}
+
+static char	*manage_n(char *str)
+{
+	int		i;
+	char
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] ==  '\n')
+		{
+			
+			
+		}
+		
+	}
+	
 }
