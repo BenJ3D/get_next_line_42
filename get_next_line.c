@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 20:00:04 by bducrocq          #+#    #+#             */
-/*   Updated: 2021/12/06 12:24:22 by bducrocq         ###   ########.fr       */
+/*   Updated: 2021/12/06 14:18:54 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,17 @@ char	*get_next_line(int fd)
 	while (1)   // boucle principale, decoupe au premier \n
 	{
 		//si after != NULL
-		///cpy jusqu'au \n
-		
+		///cpy jusqu'au backn
+		if (read(fd, buf, 0) < 0)
+			return (NULL);
 		//lis le fichier si aftern est vide
 		///>>
-		ret = read(fd, buf, BUFFER_SIZE);
-		buf[ret] = '\0';
+		if (after_n != NULL)
+		{
+			ret = read(fd, buf, BUFFER_SIZE);
+			buf[ret] = '\0';
+			
+		}
 		//after_n = ft_copy_after_n(buf); //
 		// parcourir le buf et cherche un \n
 		////ft_bufchr << buf   >> return 0 si pas de \n ou return la position du \n
@@ -77,4 +82,22 @@ char	*get_next_line(int fd)
 	return (tmp);
 }
 
-char
+char	
+
+
+
+
+// if (read(fd, buf, 0) < 0)
+//         return (NULL);
+//     while (!ft_strchr(str, '\n') && i != 0)
+//     {
+//         i = read(fd, buf, BUFFER_SIZE);
+//         if (i < 0)
+//             return (0);
+//         buf[i] = '\0';
+//         str = ft_strjoin(str, buf);
+//         if (!str)
+//             return (0);
+//     }
+//     if (ft_strchr(str, '\n'))
+//         return (extract_nl(&str));
