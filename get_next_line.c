@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 20:00:04 by bducrocq          #+#    #+#             */
-/*   Updated: 2021/12/03 17:35:59 by bducrocq         ###   ########.fr       */
+/*   Updated: 2021/12/06 12:20:10 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	*get_next_line(int fd)
 	size_t			ret;
 	char			buf[BUFFER_SIZE + 1];
 	size_t			i;
-	static char		*tmp = NULL;
+	char		*tmp = NULL;
 	int				bool;
 	static char		*after_n = NULL;
 
