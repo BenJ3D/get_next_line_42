@@ -6,21 +6,40 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 20:00:04 by bducrocq          #+#    #+#             */
-/*   Updated: 2021/12/07 13:21:04 by bducrocq         ###   ########.fr       */
+/*   Updated: 2021/12/07 15:44:51 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+char	*get_line(char *str)  //copy juska trouver \n ou \0 et return le result
+{
+	int	i;
 
-char	*memory_process(char *str)
+	i = 0;
+	while (str[++i])
+	{
+		if (str[i] == '\n')
+		{
+			str[i + 1] = '\0';
+			break;
+		}
+	}
+	return (str);
+}
+
+char	*memory_process(char *str) //met en memoire dans memo tous apres un \n et retourn le result
 {
 	if (!str)
 		return(NULL);
 	if (ft_strchr(str, '\n'))
-		printf ("memory_process =|| %s ||\n", str);
+	{
+		if (str[ft_strlen(str)] == '\n')
+			return (ft_strchr(str, '\n'));
+		return (ft_strchr(str, '\n') + 1);
+	}
 	return (str);
 }
- 
+
 char	*get_next_line(int fd)
 {	
 	char			buf[BUFFER_SIZE + 1];
@@ -33,12 +52,15 @@ char	*get_next_line(int fd)
 	tmp = ft_strdup("");
 	if (read(fd, buf, 0) < 0)
 		return (NULL);
-	if (memo != NULL && (!ft_strchr(memo, '\n')))   // TODO:  FIXME: reprendre ICI poru gerer 
+	if (memo != NULL)	// reprendre ici pour gerer 
 	{
+		free(tmp);
+		tmp = ft_strdup("");
+		tmp = ft_strdup(memo);
 		memo = memory_process(memo);
-		return	
+		return (get_line(memo)); //FIXME: doit retourner jusqu au \n et pas le restant
 	}
-	while (!ft_strchr(tmp, '\n') && ret != 0)// boucle tant que pas de \n ou ret 0
+	while (!ft_strchr(tmp, '\n') && ret != 0)	// boucle tant que pas de \n ou ret 0
 	{
 		ret = read(fd, buf, BUFFER_SIZE);	// protege un cas error si read -1
 		if (ret < 0)
@@ -52,8 +74,7 @@ char	*get_next_line(int fd)
 	if (ft_strchr(tmp, '\n'))
 	{
 		memo = malloc(sizeof(char) * ((ft_strlen(tmp) + 1)));
-		memo = ft_strchr(tmp, '\n');
-		printf("memo = %s\n",  memo);
+		memo = (ft_strchr(tmp, '\n') + 1);
 	}
 	return(tmp);
 }
