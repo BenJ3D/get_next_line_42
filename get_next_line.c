@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 20:00:04 by bducrocq          #+#    #+#             */
-/*   Updated: 2021/12/07 12:15:19 by bducrocq         ###   ########.fr       */
+/*   Updated: 2021/12/07 12:30:00 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ char	*get_next_line(int fd)
 	static char		*memory= NULL;
 	char			*tmp;
 
+	ret = 1;
 	tmp = ft_strdup("");
 	if (read(fd, buf, 0) < 0)
 		return (NULL);
@@ -36,7 +37,25 @@ char	*get_next_line(int fd)
 			return (0);
 		i++;
 	}
-	
+	if (ft_strchr(tmp, '\n'))
+	{
+		memory = malloc
+	}
 	return(tmp);
 }
 
+
+// if (read(fd, buf, 0) < 0)
+// 		return (NULL);
+// 	while (!ft_strchr(str, '\n') && i != 0)
+// 	{
+// 		i = read(fd, buf, BUFFER_SIZE);
+// 		if (i < 0)
+// 			return (0);
+// 		buf[i] = '\0';
+// 		str = ft_strjoin(str, buf);
+// 		if (!str)
+// 			return (0);
+// 	}
+// 	if (ft_strchr(str, '\n'))
+// 	
