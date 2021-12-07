@@ -6,12 +6,14 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 20:00:04 by bducrocq          #+#    #+#             */
-/*   Updated: 2021/12/07 18:00:48 by bducrocq         ###   ########.fr       */
+/*   Updated: 2021/12/07 18:55:36 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-// TODO: doit gerer quand str = "\n JU \0"
+// TODO: gerer quand memo est finis mais pas le text"
+// TODO: gerer la fin du texte \0
+// TODO: problem avec memo -->> gerer quand memo na plus de \n pour re read
 char	*get_line(char *str)  //copy juska trouver \n ou \0 et return le result
 {
 	int		i;
@@ -73,7 +75,8 @@ char	*get_next_line(int fd)
 		free(tmp);  // forcement deuxieme tour, donc free pour pas leaks ?!
 		tmp = ft_strdup(memo);
 		memo = memory_process(memo);
-		return (get_line(tmp)); // return jusqua \n FIXME: ne gere pas un seul \n
+		if (ft_strchr(tmp, '\n'))
+			return (get_line(tmp)); // return jusqua \n FIXME: ne gere pas un seul \n		
 	}
 	while (!ft_strchr(tmp, '\n') && ret != 0)	// boucle tant que pas de \n ou ret 0
 	{
