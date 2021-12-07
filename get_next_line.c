@@ -6,25 +6,32 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 20:00:04 by bducrocq          #+#    #+#             */
-/*   Updated: 2021/12/07 15:44:51 by bducrocq         ###   ########.fr       */
+/*   Updated: 2021/12/07 16:10:32 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 char	*get_line(char *str)  //copy juska trouver \n ou \0 et return le result
 {
-	int	i;
+	int		i;
+	char	*tmp;
 
+	// if(tmp) TODO: protection contre leak ?
+	// 	free(tmp);
+	tmp = ft_calloc((BUFFER_SIZE + 1), sizeof(char));
+	if (!tmp)
+		return (NULL);
 	i = 0;
-	while (str[++i])
+	ft_memcpy(tmp, str, ft_strlen(str));
+	while (tmp[++i])
 	{
-		if (str[i] == '\n')
+		if (tmp[i] == '\n')
 		{
-			str[i + 1] = '\0';
+			tmp[i] = '\0';
 			break;
 		}
 	}
-	return (str);
+	return (tmp);
 }
 
 char	*memory_process(char *str) //met en memoire dans memo tous apres un \n et retourn le result
@@ -52,13 +59,13 @@ char	*get_next_line(int fd)
 	tmp = ft_strdup("");
 	if (read(fd, buf, 0) < 0)
 		return (NULL);
-	if (memo != NULL)	// reprendre ici pour gerer 
+	if (memo != NULL)
 	{
 		free(tmp);
 		tmp = ft_strdup("");
 		tmp = ft_strdup(memo);
 		memo = memory_process(memo);
-		return (get_line(memo)); //FIXME: doit retourner jusqu au \n et pas le restant
+		return (get_line(tmp)); //FIXME: doit retourner jusqu au \n et pas le restant
 	}
 	while (!ft_strchr(tmp, '\n') && ret != 0)	// boucle tant que pas de \n ou ret 0
 	{
@@ -71,12 +78,12 @@ char	*get_next_line(int fd)
 			return (0);
 		i++;
 	}
-	if (ft_strchr(tmp, '\n'))
+	if (ft_strchr(tmp, '\n') && memo == NULL)
 	{
 		memo = malloc(sizeof(char) * ((ft_strlen(tmp) + 1)));
 		memo = (ft_strchr(tmp, '\n') + 1);
 	}
-	return(tmp);
+	return(get_line(tmp));   // FIXME: doit retourner jusquau \n
 }
 
 
