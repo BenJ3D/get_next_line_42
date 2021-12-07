@@ -6,26 +6,33 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 20:00:04 by bducrocq          #+#    #+#             */
-/*   Updated: 2021/12/07 16:50:03 by bducrocq         ###   ########.fr       */
+/*   Updated: 2021/12/07 18:00:48 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+// TODO: doit gerer quand str = "\n JU \0"
 char	*get_line(char *str)  //copy juska trouver \n ou \0 et return le result
 {
 	int		i;
 	char	*tmp;
 
-	tmp = ft_calloc((BUFFER_SIZE + 1), sizeof(char));
+	tmp = ft_calloc ((ft_strlen(str)), sizeof(char));
 	if (!tmp)
 		return (NULL);
 	i = 0;
 	ft_memcpy(tmp, str, ft_strlen(str));
-	while (tmp[++i])
+	if (tmp[0] == '\n')
+	{
+		tmp[1] = '\0';
+		free(str);
+		return (tmp);
+	}
+	while (tmp[i++])
 	{
 		if (tmp[i] == '\n')
 		{
-			tmp[i] = '\0';
+			tmp[i + 1] = '\0';
 			break;
 		}
 	}
@@ -37,6 +44,8 @@ char	*memory_process(char *str) //met en memoire dans memo tous apres un \n et r
 {
 	if (!str)
 		return(NULL);
+	if (str[0] == '\n')  //FIXME: pas sur cest utile
+		return (&str[1]);
 	if (ft_strchr(str, '\n'))
 	{
 		if (str[ft_strlen(str)] == '\n')
@@ -56,14 +65,15 @@ char	*get_next_line(int fd)
 
 	ret = 1;
 	tmp = ft_strdup("");
+	ft_bzero(buf, BUFFER_SIZE);
 	if (read(fd, buf, 0) < 0)
 		return (NULL);
 	if (memo != NULL && *memo != '\0')
 	{
-		free(tmp);
+		free(tmp);  // forcement deuxieme tour, donc free pour pas leaks ?!
 		tmp = ft_strdup(memo);
 		memo = memory_process(memo);
-		return (get_line(tmp)); // return jusqua \n
+		return (get_line(tmp)); // return jusqua \n FIXME: ne gere pas un seul \n
 	}
 	while (!ft_strchr(tmp, '\n') && ret != 0)	// boucle tant que pas de \n ou ret 0
 	{
@@ -81,6 +91,8 @@ char	*get_next_line(int fd)
 		memo = malloc(sizeof(char) * ((ft_strlen(tmp) + 1)));
 		memo = (ft_strchr(tmp, '\n') + 1);
 	}
+	if (!ft_strchr(memo, '\n'))
+		memo[0] = '\0';
 	return(get_line(tmp));
 }
 
