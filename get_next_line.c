@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 20:00:04 by bducrocq          #+#    #+#             */
-/*   Updated: 2021/12/07 16:10:32 by bducrocq         ###   ########.fr       */
+/*   Updated: 2021/12/07 16:50:03 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ char	*get_line(char *str)  //copy juska trouver \n ou \0 et return le result
 	int		i;
 	char	*tmp;
 
-	// if(tmp) TODO: protection contre leak ?
-	// 	free(tmp);
 	tmp = ft_calloc((BUFFER_SIZE + 1), sizeof(char));
 	if (!tmp)
 		return (NULL);
@@ -31,6 +29,7 @@ char	*get_line(char *str)  //copy juska trouver \n ou \0 et return le result
 			break;
 		}
 	}
+	free(str);
 	return (tmp);
 }
 
@@ -59,13 +58,12 @@ char	*get_next_line(int fd)
 	tmp = ft_strdup("");
 	if (read(fd, buf, 0) < 0)
 		return (NULL);
-	if (memo != NULL)
+	if (memo != NULL && *memo != '\0')
 	{
 		free(tmp);
-		tmp = ft_strdup("");
 		tmp = ft_strdup(memo);
 		memo = memory_process(memo);
-		return (get_line(tmp)); //FIXME: doit retourner jusqu au \n et pas le restant
+		return (get_line(tmp)); // return jusqua \n
 	}
 	while (!ft_strchr(tmp, '\n') && ret != 0)	// boucle tant que pas de \n ou ret 0
 	{
@@ -83,7 +81,7 @@ char	*get_next_line(int fd)
 		memo = malloc(sizeof(char) * ((ft_strlen(tmp) + 1)));
 		memo = (ft_strchr(tmp, '\n') + 1);
 	}
-	return(get_line(tmp));   // FIXME: doit retourner jusquau \n
+	return(get_line(tmp));
 }
 
 
