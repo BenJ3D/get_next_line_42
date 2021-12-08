@@ -6,33 +6,9 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 18:33:21 by bducrocq          #+#    #+#             */
-/*   Updated: 2021/12/02 17:28:54 by bducrocq         ###   ########.fr       */
+/*   Updated: 2021/12/08 18:50:44 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // #include "../libft/libft.h"
-#include "get_next_line.h"
-
-char	*ft_strjoin_gnl(char *s1, char *s2, int buf_end)
-{
-	size_t	i;
-	size_t	j;
-	char	*str;
-
-	s2[buf_end] = '\0';
-	if (!s1)
-		return (0);
-	str = ft_calloc((ft_strlen(s1) + ft_strlen(s2) + 1), sizeof(char));
-	if (!str)
-		return (NULL);
-	i = 0;
-	j = 0;
-	while (s1[i])
-		str[j++] = s1[i++];
-	i = 0;
-	while (s2[i])
-		str[j++] = s2[i++];
-	str[j] = '\0';
-	free(s1);
-	return (str);
-}
+//#include "get_next_line.h"

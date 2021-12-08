@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 20:00:04 by bducrocq          #+#    #+#             */
-/*   Updated: 2021/12/08 17:48:08 by bducrocq         ###   ########.fr       */
+/*   Updated: 2021/12/08 19:04:46 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,87 +38,54 @@ char	*get_line(char *str)  //copy juska trouver \n ou \0 et return le result
 			break;
 		}
 	}
-	//free(str);
 	return (tmp);
 }
-
-char	*memory_process(char *str) //met en memoire dans memo tous apres un \n et retourn le result
+static size_t	ft_strlen_gnl(const char *str)
 {
-	if (!str)
-		return(NULL);
-	if (str[0] == '\n' && ft_strlen(str) > 1)  //FIXME: pas sur cest utile
-		return (&str[1]);
-	if (ft_strchr(str, '\n'))
+	size_t	i;
+
+	i = 0;
+	while (str[i])
 	{
-		if (str[ft_strlen(str)] == '\n')
-			return (ft_strchr(str, '\n'));
-		return (ft_strchr(str, '\n') + 1);
+		i++;
 	}
+	return (i);
+}
+char	*ft_strjoin_gnl(char *s1, char *s2, int buf_end)
+{
+	size_t	i;
+	size_t	j;
+	char	*str;
+
+	s2[buf_end] = '\0';
+	if (!s1)
+		return (0);
+	str = ft_calloc((ft_strlen(s1) + ft_strlen(s2) + 1), sizeof(char));
+	if (!str)
+		return (NULL);
+	i = 0;
+	j = 0;
+	while (s1[i])
+		str[j++] = s1[i++];
+	i = 0;
+	while (s2[i])
+		str[j++] = s2[i++];
+	str[j] = '\0';
+	free(s1);
 	return (str);
 }
 
+
 char	*get_next_line(int fd)
 {	
-	char			buf[BUFFER_SIZE + 1];
-	size_t			i;
-	size_t			ret;
-	static char		*memo = NULL;
-	char			*tmp;
+	static char		buf[BUFFER_SIZE + 1];
+	int				ret;
+	int				eol;
+	char			*line;
 
-	ret = 1;
-	tmp = ft_strdup("");
-	ft_bzero(buf, BUFFER_SIZE);
-	if (read(fd, buf, 0) < 0)
-		return (NULL);
-	if (memo != NULL && *memo != '\0' && (ft_strchr(memo, '\n')))
-	{
-		free(tmp);  // forcement deuxieme tour, donc free pour pas leaks ?!
-		tmp = ft_strdup(memo);
-		memo = memory_process(memo);
-		if (ft_strchr(tmp, '\n'))
-			return (get_line(tmp)); // return jusqua \n
-	}
-	if (memo && !(ft_strchr(memo, '\n')))
-	{
-		free(tmp);
-		tmp = ft_strdup(memo);
-		//memo[0] = '\0';
-		//ft_bzero(memo, ft_strlen(memo));
-		//free(memo);
-	}
-	while (!ft_strchr(tmp, '\n') && ret != 0)	// boucle tant que pas de \n ou ret 0
-	{
-		ret = read(fd, buf, BUFFER_SIZE);	// protege un cas error si read -1
-		if (ret <= 0)
-			return (0);
-		buf[ret] = '\0';
-		tmp = ft_strjoin_gnl(tmp, buf, BUFFER_SIZE);
-		if (!tmp)
-			return (0);
-		i++;
-	}
-	if (ft_strchr(tmp, '\n') && memo == NULL)  // FIXME: memo ne se vide pas 
-	{
-		memo = malloc(sizeof(char) * ((ft_strlen(tmp) + 1)));
-		memo = (ft_strchr(tmp, '\n') + 1);
-	}
-	if (!ft_strchr(memo, '\n'))
-		memo = memory_process(tmp);
-	return(get_line(tmp));
+	ret = read(fd, buf, BUFFER_SIZE);
+	//0
+	
+	
+	return(NULL);
 }
-
-
-// if (read(fd, buf, 0) < 0)
-// 		return (NULL);
-// 	while (!ft_strchr(str, '\n') && i != 0)
-// 	{
-// 		i = read(fd, buf, BUFFER_SIZE);
-// 		if (i < 0)
-// 			return (0);
-// 		buf[i] = '\0';
-// 		str = ft_strjoin(str, buf);
-// 		if (!str)
-// 			return (0);
-// 	}
-// 	if (ft_strchr(str, '\n'))
-// 	
