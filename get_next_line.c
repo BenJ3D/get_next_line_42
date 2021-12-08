@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 20:00:04 by bducrocq          #+#    #+#             */
-/*   Updated: 2021/12/08 19:04:46 by bducrocq         ###   ########.fr       */
+/*   Updated: 2021/12/08 19:30:57 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,16 +51,15 @@ static size_t	ft_strlen_gnl(const char *str)
 	}
 	return (i);
 }
-char	*ft_strjoin_gnl(char *s1, char *s2, int buf_end)
+char	*ft_strjoin_gnl(char *s1, char *s2, int buf_end, int size)
 {
 	size_t	i;
 	size_t	j;
 	char	*str;
 
-	s2[buf_end] = '\0';
 	if (!s1)
 		return (0);
-	str = ft_calloc((ft_strlen(s1) + ft_strlen(s2) + 1), sizeof(char));
+	str = ft_calloc(ft_strlen(s1) + size + 1), sizeof(char));
 	if (!str)
 		return (NULL);
 	i = 0;
@@ -68,8 +67,11 @@ char	*ft_strjoin_gnl(char *s1, char *s2, int buf_end)
 	while (s1[i])
 		str[j++] = s1[i++];
 	i = 0;
-	while (s2[i])
+	while (s2[i] || size != 0)
+	{
 		str[j++] = s2[i++];
+		size--;
+	}
 	str[j] = '\0';
 	free(s1);
 	return (str);
@@ -78,14 +80,26 @@ char	*ft_strjoin_gnl(char *s1, char *s2, int buf_end)
 
 char	*get_next_line(int fd)
 {	
-	static char		buf[BUFFER_SIZE + 1];
+	char			buf[BUFFER_SIZE + 1];
+	static char		tmp[BUFFER_SIZE + 1];
 	int				ret;
 	int				eol;
 	char			*line;
 
-	ret = read(fd, buf, BUFFER_SIZE);
-	//0
+line = ft_strdup("");
+while ((ft_strichr(line, '\n') == -1)&& ret != 0)	// boucle tant que pas de \n ou ret 0 TODO:
+	{
+		eol = ft_strichr(buf);
+		if (eol == -1)
+			eol = BUFFER_SIZE; 
+		ret = read(fd, buf, BUFFER_SIZE);	// protege un cas error si read -1
+		if (ret <= 0)
+			return (0);
+		buf[ret] = '\0';
+		line = ft_strjoin_gnl(line, buf, BUFFER_SIZE, eol);
+		//if ()
 	
+	}
 	
-	return(NULL);
+	return(line);
 }
