@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 20:00:04 by bducrocq          #+#    #+#             */
-/*   Updated: 2021/12/08 17:36:49 by bducrocq         ###   ########.fr       */
+/*   Updated: 2021/12/08 19:06:16 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ char	*get_next_line(int fd)
 	char			buf[BUFFER_SIZE + 1];
 	size_t			i;
 	size_t			ret;
-	static char		*memo = NULL;
+	static char		memo[BUFFER_SIZE + 1];
 	char			*tmp;
 
 	ret = 1;
@@ -99,7 +99,6 @@ char	*get_next_line(int fd)
 	}
 	if (ft_strchr(tmp, '\n') && memo == NULL)  // FIXME: memo ne se vide pas 
 	{
-		memo = malloc(sizeof(char) * ((ft_strlen(tmp) + 1)));
 		memo = (ft_strchr(tmp, '\n') + 1);
 	}
 	if (!ft_strchr(memo, '\n'))
