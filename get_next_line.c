@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 20:00:04 by bducrocq          #+#    #+#             */
-/*   Updated: 2021/12/08 17:21:56 by bducrocq         ###   ########.fr       */
+/*   Updated: 2021/12/08 17:36:49 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char	*get_line(char *str)  //copy juska trouver \n ou \0 et return le result
 			break;
 		}
 	}
-	free(str);
+	//free(str);
 	return (tmp);
 }
 
