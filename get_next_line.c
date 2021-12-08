@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 20:00:04 by bducrocq          #+#    #+#             */
-/*   Updated: 2021/12/08 17:36:49 by bducrocq         ###   ########.fr       */
+/*   Updated: 2021/12/08 17:48:08 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char	*memory_process(char *str) //met en memoire dans memo tous apres un \n et r
 {
 	if (!str)
 		return(NULL);
-	if (str[0] == '\n')  //FIXME: pas sur cest utile
+	if (str[0] == '\n' && ft_strlen(str) > 1)  //FIXME: pas sur cest utile
 		return (&str[1]);
 	if (ft_strchr(str, '\n'))
 	{
