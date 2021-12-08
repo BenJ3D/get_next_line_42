@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 20:00:04 by bducrocq          #+#    #+#             */
-/*   Updated: 2021/12/07 18:55:36 by bducrocq         ###   ########.fr       */
+/*   Updated: 2021/12/08 17:21:56 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,18 +70,26 @@ char	*get_next_line(int fd)
 	ft_bzero(buf, BUFFER_SIZE);
 	if (read(fd, buf, 0) < 0)
 		return (NULL);
-	if (memo != NULL && *memo != '\0')
+	if (memo != NULL && *memo != '\0' && (ft_strchr(memo, '\n')))
 	{
 		free(tmp);  // forcement deuxieme tour, donc free pour pas leaks ?!
 		tmp = ft_strdup(memo);
 		memo = memory_process(memo);
 		if (ft_strchr(tmp, '\n'))
-			return (get_line(tmp)); // return jusqua \n FIXME: ne gere pas un seul \n		
+			return (get_line(tmp)); // return jusqua \n
+	}
+	if (memo && !(ft_strchr(memo, '\n')))
+	{
+		free(tmp);
+		tmp = ft_strdup(memo);
+		//memo[0] = '\0';
+		//ft_bzero(memo, ft_strlen(memo));
+		//free(memo);
 	}
 	while (!ft_strchr(tmp, '\n') && ret != 0)	// boucle tant que pas de \n ou ret 0
 	{
 		ret = read(fd, buf, BUFFER_SIZE);	// protege un cas error si read -1
-		if (ret < 0)
+		if (ret <= 0)
 			return (0);
 		buf[ret] = '\0';
 		tmp = ft_strjoin_gnl(tmp, buf, BUFFER_SIZE);
@@ -89,13 +97,13 @@ char	*get_next_line(int fd)
 			return (0);
 		i++;
 	}
-	if (ft_strchr(tmp, '\n') && memo == NULL)
+	if (ft_strchr(tmp, '\n') && memo == NULL)  // FIXME: memo ne se vide pas 
 	{
 		memo = malloc(sizeof(char) * ((ft_strlen(tmp) + 1)));
 		memo = (ft_strchr(tmp, '\n') + 1);
 	}
 	if (!ft_strchr(memo, '\n'))
-		memo[0] = '\0';
+		memo = memory_process(tmp);
 	return(get_line(tmp));
 }
 
