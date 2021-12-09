@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 17:31:54 by bducrocq          #+#    #+#             */
-/*   Updated: 2021/12/08 19:21:45 by bducrocq         ###   ########.fr       */
+/*   Updated: 2021/12/09 16:47:53 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	main(void)
 		printf("fd : %d\n\n", fd);
 
 	reset();
-	while((str = get_next_line(fd)) && i < 21)
+	while((str = get_next_line(fd)) && i < 10)
 	{
 		cyan();
 		printf("%.2d |", i);
