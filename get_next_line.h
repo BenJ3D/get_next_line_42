@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 19:56:31 by bducrocq          #+#    #+#             */
-/*   Updated: 2021/12/09 18:03:47 by bducrocq         ###   ########.fr       */
+/*   Updated: 2021/12/09 19:19:18 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 
 char	*get_next_line(int fd);
 char	*ft_strjoin_gnl(char *s1, char *s2, int buf_end);
+char	*get_line(char *str);
 // char	*ft_strjoin_gnl(char *s1_line, char *s2_buf, int buf_end, int start_join);
 int	ft_strichr(const char *s, int c);
 

@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 20:00:04 by bducrocq          #+#    #+#             */
-/*   Updated: 2021/12/09 18:34:46 by bducrocq         ###   ########.fr       */
+/*   Updated: 2021/12/09 19:21:41 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,40 +42,6 @@ static size_t	ft_strlen_gnl(const char *str)
 	return (i);
 }
 
-// char	*ft_strjoin_gnl(char *s1_line, char *s2_buf, int buf_end, int start_join)
-// {
-// 	size_t	i;
-// 	size_t	j;
-// 	int		len_s1;
-// 	int		len_s2;
-// 	char	*str;
-
-// 	len_s1 = ft_strlen(s1_line);
-// 	len_s2 = ft_strlen(s2_buf);
-// 	// TODO: gerer le joint si s1_line ou s2_buf sont vide -->> strdup ?
-// 	if (!s1_line)
-// 		s1_line = malloc(sizeof(char) * BUFFER_SIZE + 1);
-// 	if (!s2_buf)
-// 		s2_buf = malloc(sizeof(char) * BUFFER_SIZE + 1);
-// 	str = ft_calloc(len_s1 + len_s2 + 1, sizeof(char));
-// 	if (!str)
-// 		return (NULL);
-// 	i = 0;
-// 	j = 0;
-// 	while (s1_line[i])
-// 		str[j++] = s1_line[i++];
-// 	i = 0;
-// 	while (start_join != 0)
-// 	{
-// 		str[j++] = s2_buf[i++];
-// 		start_join--;
-// 	}
-// 	str[j] = '\0';
-// 	free(s1_line);
-// 	//free(s2_buf);
-// 	return (str);
-// }
-
 char	*get_next_line(int fd)
 {	
 	static char 	buf[BUFFER_SIZE + 1];
@@ -97,6 +63,7 @@ while ((eol = ft_strichr(buf, '\n') == -1) && ret != 0)	// boucle tant que pas d
 		buf[ret] = '\0';
 		line = ft_strjoin_gnl(line, buf, BUFFER_SIZE); // modifier le joint pour prendre en compte lindex	
 	}
+	line = get_line(line); // TODO: ajouter buf en param pour mettre a zero avant \n
 	eol = ft_strichr(buf, '\n');
 	
 	//ft_strichr lire le buf, index juskau \n return position du n ou -1 
