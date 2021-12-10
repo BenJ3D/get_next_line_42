@@ -6,19 +6,30 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 18:33:21 by bducrocq          #+#    #+#             */
-/*   Updated: 2021/12/10 22:38:17 by bducrocq         ###   ########.fr       */
+/*   Updated: 2021/12/10 23:25:50 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "../libft/libft.h"
 #include "get_next_line.h"
+
+static size_t	ft_strlen(const char *str)
+{
+	size_t	i;
+
+	i = 0;
+	while (str[i])
+	{
+		i++;
+	}
+	return (i);
+}
 
 char	*ft_strjoin_gnl(char *s1, char *s2, int buf_end)
 {
-	size_t	i;
-	size_t	j;
+	long	i;
+	long	j;
 	char	*str;
-	int		len_s2;
+	long	len_s2;
 
 	i = 0;
 	while (*s2 == '\0' && i < BUFFER_SIZE)
@@ -49,30 +60,42 @@ char	*ft_strjoin_gnl(char *s1, char *s2, int buf_end)
 	free(s1);
 	return (str);
 }
+void	*ft_calloc(size_t count, size_t size)
+{
+	void	*ptr;
 
-// char	*get_line(char *str)  //copy juska trouver \n ou \0 et return le result
-// {
-// 	int		i;
-// 	char	*tmp;
+	ptr = malloc(count * size);
+	if (ptr == NULL)
+		return (ptr);
+	//ft_bzero(ptr, size * count);
+	ft_memset(ptr, 0, size * count);
+	return (ptr);
+}
 
-// 	tmp = ft_calloc((ft_strlen(str)), sizeof(char));
-// 	if (!tmp)
-// 		return (NULL);
-// 	i = 0;
-// 	ft_memcpy(tmp, str, ft_strlen(str));
-// 	if (tmp[0] == '\n')
-// 	{
-// 		tmp[1] = '\0';
-// 		free(str);
-// 		return (tmp);
-// 	}
-// 	while (tmp[i++])
-// 	{
-// 		if (tmp[i] == '\n')
-// 		{
-// 			tmp[i + 1] = '\0';
-// 			break;
-// 		}
-// 	}
-// 	return (tmp);
-// }
+char	*ft_strdup(const char *s1)
+{
+	char	*res;
+	size_t	i;
+
+	i = 0;
+	res = malloc(sizeof(char) * (ft_strlen(s1) + 1));
+	if (!res)
+		return (NULL);
+	while (s1[i])
+	{
+		res[i] = s1[i];
+		i++;
+	}
+	res[i] = 0;
+	return (res);
+}
+
+void	*ft_memset(void *b, int c, size_t len)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < len)
+		((char *)b)[i++] = c;
+	return (b);
+}

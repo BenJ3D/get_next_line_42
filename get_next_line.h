@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 19:56:31 by bducrocq          #+#    #+#             */
-/*   Updated: 2021/12/10 15:41:46 by bducrocq         ###   ########.fr       */
+/*   Updated: 2021/12/10 23:27:58 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,15 @@
 # include <sys/types.h>
 # include <sys/uio.h>	
 # include <unistd.h>
-# include "./includes/libft.h"
+//# include "./includes/libft.h"
 
-char		*get_next_line(int fd);
-char		*ft_strjoin_gnl(char *s1, char *s2, int buf_end);
-static char	*get_line(char *str);
-int			ft_buf_process(char *bufp);
-// char	*ft_strjoin_gnl(char *s1_line, char *s2_buf, int buf_end, int start_join);
-int	ft_strichr(const char *s, int c);
+char			*get_next_line(int fd);
+char			*ft_strjoin_gnl(char *s1, char *s2, int buf_end);
+int				ft_buf_process(char *bufp);
+int				ft_strichr(const char *s, int c);
+//static size_t	ft_strlen(const char *str);
+void			*ft_calloc(size_t count, size_t size);
+char			*ft_strdup(const char *s1);
+void			*ft_memset(void *b, int c, size_t len);
 
 #endif
