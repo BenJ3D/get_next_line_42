@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 18:33:21 by bducrocq          #+#    #+#             */
-/*   Updated: 2021/12/10 21:59:57 by bducrocq         ###   ########.fr       */
+/*   Updated: 2021/12/10 22:38:17 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,20 @@ char	*ft_strjoin_gnl(char *s1, char *s2, int buf_end)
 	int		len_s2;
 
 	i = 0;
-	while (*s2 == '\0' && i <= BUFFER_SIZE)
+	while (*s2 == '\0' && i < BUFFER_SIZE)
 	{
 		s2++;
 		i++;
 	}
+	// if (i == BUFFER_SIZE)
+	// {
+	// 	free(s1);
+	// 	return (NULL);
+	// }
+	if (buf_end != BUFFER_SIZE)
+		len_s2 = i;
 	len_s2 = buf_end - i;
 	i = 0;
-	if (!s1)
-		return (0);
 	str = ft_calloc((ft_strlen(s1) + (len_s2) + 1), sizeof(char));
 	if (!str)
 		return (NULL);
