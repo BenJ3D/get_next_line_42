@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 20:00:04 by bducrocq          #+#    #+#             */
-/*   Updated: 2021/12/10 21:39:16 by bducrocq         ###   ########.fr       */
+/*   Updated: 2021/12/10 22:20:06 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,13 @@ static size_t	ft_strlen_gnl(const char *str)
 
 int	ft_buf_process(char *bufp)
 {
+	int	i;
+
+	i = 0;
 	while (*bufp != '\n')
 	{
+		if (i == BUFFER_SIZE)//FIXME: attention
+			break ;
 		*bufp = '\0';
 		bufp++;
 	}
@@ -69,10 +74,16 @@ char	*get_next_line(int fd)
 
 	ret = 1;
 	line = ft_strdup("");
+	eol = ft_strichr(buf, '\n');
 	if (ft_strichr(buf, '\n') != -1)
 	{
 		eol = ft_strichr(buf, '\n');
 		line = ft_strjoin_gnl(line, buf, eol);
+	}
+	if (eol == BUFFER_SIZE)
+	{
+		line = ft_strjoin_gnl(line, buf, eol);
+		ft_buf_process(buf); // met a zero jusquau \n
 	}
 	while ((ft_strichr(buf, '\n') == -1) && ret != 0)	// boucle tant que pas de \n ou ret 0 
 	{

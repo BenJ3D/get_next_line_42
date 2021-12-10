@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 18:33:21 by bducrocq          #+#    #+#             */
-/*   Updated: 2021/12/10 21:46:23 by bducrocq         ###   ########.fr       */
+/*   Updated: 2021/12/10 21:59:57 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,17 @@ char	*ft_strjoin_gnl(char *s1, char *s2, int buf_end)
 	char	*str;
 	int		len_s2;
 
-	len_s2 = (BUFFER_SIZE - buf_end);
 	i = 0;
 	while (*s2 == '\0' && i <= BUFFER_SIZE)
 	{
 		s2++;
 		i++;
 	}
+	len_s2 = buf_end - i;
 	i = 0;
 	if (!s1)
 		return (0);
-	str = ft_calloc((ft_strlen(s1) + (len_s2 + 1)), sizeof(char));
+	str = ft_calloc((ft_strlen(s1) + (len_s2) + 1), sizeof(char));
 	if (!str)
 		return (NULL);
 	i = 0;
@@ -38,7 +38,7 @@ char	*ft_strjoin_gnl(char *s1, char *s2, int buf_end)
 	while (s1[i])
 		str[j++] = s1[i++];
 	i = 0;
-	while (s2[i] && i <= buf_end)
+	while (i <= len_s2)
 		str[j++] = s2[i++];
 	str[j] = '\0';
 	free(s1);
