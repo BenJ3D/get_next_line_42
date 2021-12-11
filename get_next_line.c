@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 20:00:04 by bducrocq          #+#    #+#             */
-/*   Updated: 2021/12/10 23:24:55 by bducrocq         ###   ########.fr       */
+/*   Updated: 2021/12/11 15:10:09 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	ft_strichr(const char *s, int c)	// analyse buff qui peut commencer par des 0
+int	ft_strichr(char *s, int c)	// analyse buff qui peut commencer par des 0
 {	
 	int	i;
 
@@ -24,7 +24,7 @@ int	ft_strichr(const char *s, int c)	// analyse buff qui peut commencer par des 
 		i++;
 	}
 	i = 0;
-	while (s[i] == c)
+	while (s[i] == '\0')  // FIXME: changer c en 0 , erreure ?
 	{
 		if (i == BUFFER_SIZE)
 			return(-1);   //si rien dans buf, que des 0, return -1

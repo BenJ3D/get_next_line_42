@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 18:33:21 by bducrocq          #+#    #+#             */
-/*   Updated: 2021/12/10 23:35:30 by bducrocq         ###   ########.fr       */
+/*   Updated: 2021/12/11 14:24:17 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char	*ft_strjoin_gnl(char *s1, char *s2, int buf_end)
 		len_s2 = i;
 	len_s2 = buf_end - i;
 	i = 0;
-	str = ft_calloc((ft_strlen(s1) + (len_s2) + 1), sizeof(char));
+	str = ft_calloc((ft_strlen(s1) + (len_s2) + 1), sizeof(char*));
 	if (!str)
 		return (NULL);
 	i = 0;

@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 17:31:54 by bducrocq          #+#    #+#             */
-/*   Updated: 2021/12/11 01:19:13 by bducrocq         ###   ########.fr       */
+/*   Updated: 2021/12/11 15:07:48 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#define PATH path1
 #include "get_next_line.h"
 // /*fonctions pour changer couleur des print f*/
 void red () { printf("\033[1;31m"); }
@@ -25,12 +26,12 @@ void reset (){  printf("\033[0m");}
 int	main(void)
 {
 	int			fd;
-	//char	path1[] = "./bible.txt";
+	char	path2[] = "./bible.txt";
 	char	path1[] = "./42";
 	int	i = 1; // compte les lignes
 	char *str;
 
-	fd = open(path1, O_RDONLY);
+	fd = open(PATH, O_RDONLY);
 	// fd = 2;
 		purple();
 	printf("\nBUFFER_SIZE = : %d\n", BUFFER_SIZE);
