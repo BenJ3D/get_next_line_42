@@ -5,9 +5,9 @@
             "type": "lldb",
             "request": "launch",
             "name": "Debug",
-            "program": "${workspaceFolder}/a.out",
+            "program": "\\wsl.localhost\Ubuntu\home\ben\get_next_line\a.out",
             "args": [],
-            "cwd": "${workspaceFolder}",
+            "cwd": "\\wsl.localhost\Ubuntu\home\ben\get_next_line\",
             "preLaunchTask": "build",
         }
     ]
