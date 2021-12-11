@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 18:33:21 by bducrocq          #+#    #+#             */
-/*   Updated: 2021/12/10 23:25:50 by bducrocq         ###   ########.fr       */
+/*   Updated: 2021/12/10 23:35:30 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,6 @@ char	*ft_strjoin_gnl(char *s1, char *s2, int buf_end)
 		s2++;
 		i++;
 	}
-	// if (i == BUFFER_SIZE)
-	// {
-	// 	free(s1);
-	// 	return (NULL);
-	// }
 	if (buf_end != BUFFER_SIZE)
 		len_s2 = i;
 	len_s2 = buf_end - i;

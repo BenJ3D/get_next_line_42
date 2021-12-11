@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 17:31:54 by bducrocq          #+#    #+#             */
-/*   Updated: 2021/12/10 23:29:22 by bducrocq         ###   ########.fr       */
+/*   Updated: 2021/12/11 01:19:13 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void reset (){  printf("\033[0m");}
 int	main(void)
 {
 	int			fd;
-	// char	path1[] = "./bible.txt";
+	//char	path1[] = "./bible.txt";
 	char	path1[] = "./42";
 	int	i = 1; // compte les lignes
 	char *str;

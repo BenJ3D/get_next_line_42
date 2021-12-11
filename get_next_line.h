@@ -6,13 +6,15 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 19:56:31 by bducrocq          #+#    #+#             */
-/*   Updated: 2021/12/10 23:27:58 by bducrocq         ###   ########.fr       */
+/*   Updated: 2021/12/10 23:57:33 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H 
-# define BUFFER_SIZE 42 // A SUPRIMER
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
+# endif
 # include <string.h>
 # include <stdlib.h>
 # include <unistd.h>
