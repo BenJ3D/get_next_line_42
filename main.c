@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 17:31:54 by bducrocq          #+#    #+#             */
-/*   Updated: 2021/12/11 15:07:48 by marvin           ###   ########.fr       */
+/*   Updated: 2021/12/14 18:14:41 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	main(void)
 {
 	int			fd;
 	char	path2[] = "./bible.txt";
+	char	path3[] = "./a";
 	char	path1[] = "./42";
 	int	i = 1; // compte les lignes
 	char *str;

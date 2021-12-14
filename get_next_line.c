@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 20:00:04 by bducrocq          #+#    #+#             */
-/*   Updated: 2021/12/11 15:10:09 by marvin           ###   ########.fr       */
+/*   Updated: 2021/12/14 19:29:15 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	ft_strichr(char *s, int c)	// analyse buff qui peut commencer par des 0
 	return (BUFFER_SIZE); // si pas de \n mais char trouvé
 }
 
-int	ft_buf_process(char *bufp)
+int	ft_buf_process(char *bufp, int ret)
 {
 	int	i;
 
@@ -47,9 +47,30 @@ int	ft_buf_process(char *bufp)
 		i++;
 	}
 	*bufp = '\0';
+	i = BUFFER_SIZE;
+	if (ret <= BUFFER_SIZE)
+	{
+		while (i > ret) //TODO: idee de mettre des zero par la droite pour cas fin de fichier
+		{
+			bufp[i] = '\0';
+			i--;
+		}
+	}
 	return (ft_strichr(bufp, '\n'));
 }
+// void clean_end_buf(char **str)
+// {
+// 	int	i;
+// 	int	end;
 
+// 	end = ft_strichr(*str, '\n');
+// 	i = 0;
+// 	while (i >= end)
+// 	{
+// 		*str[i] = '\0';
+// 		i--;
+// 	}	
+// }
 char	*get_next_line(int fd)
 {	
 	static char 	buf[BUFFER_SIZE + 1];
@@ -65,17 +86,20 @@ char	*get_next_line(int fd)
 	if (eol == BUFFER_SIZE)
 	{
 		line = ft_strjoin_gnl(line, buf, eol);
-		ft_buf_process(buf); // met a zero jusquau \n
+		ft_buf_process(buf, ret); // met a zero jusquau \n
 	}
-	while ((ft_strichr(buf, '\n') == BUFFER_SIZE || ft_strichr(buf, '\n') == -1) && ret != 0)	// boucle tant que pas de \n ou ret 0 
+	while ((ft_strichr(buf, '\n') == BUFFER_SIZE || ft_strichr(buf, '\n') == -1))	// boucle tant que pas de \n ou ret 0 FIXME: ret buff attention
 	{
+
 		ret = read(fd, buf, BUFFER_SIZE);	// protege un cas error si read -1
 		if (ret <= 0)
 			return (NULL);
 		buf[ret] = '\0';
 		eol = ft_strichr(buf, '\n');
-		line = ft_strjoin_gnl(line, buf, eol); // modifier le joint pour prendre en compte lindex	
+		line = ft_strjoin_gnl(line, buf, eol); // modifier le joint pour prendre en compte lindex
 	}
-	ft_buf_process(buf); // met a zero jusquau \n
+	ft_buf_process(buf, ret); // met a zero jusquau \n
+	// if (ret < BUFFER_SIZE) // FIXME:
+	// 	line = ft_strjoin_gnl(line, buf, eol);
 	return(line);
 }
