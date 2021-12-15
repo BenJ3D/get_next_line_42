@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 20:00:04 by bducrocq          #+#    #+#             */
-/*   Updated: 2021/12/15 17:40:47 by bducrocq         ###   ########.fr       */
+/*   Updated: 2021/12/15 18:21:49 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ char	*get_next_line(int fd)
 			return (NULL);
 		while (ret != BUFFER_SIZE)
 		{
-			buf[ret] = '\0'; // TODO: mettre a zero jusqua buffer size	
+			buf[ret] = '\0'; // TODO: mettre a zero jusqua buffer size	 
 			ret++;
 		}
 		eol = ft_strichr(buf, '\n');
