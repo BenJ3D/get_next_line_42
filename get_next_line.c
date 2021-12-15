@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 20:00:04 by bducrocq          #+#    #+#             */
-/*   Updated: 2021/12/15 16:28:27 by bducrocq         ###   ########.fr       */
+/*   Updated: 2021/12/15 17:40:47 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,17 @@ int	ft_strichr(char *s, int c)	// analyse buff qui peut commencer par des 0
 	{
 		if (s[i] == c)
 			return (i);
+		else if ( s[i] == '\0')
+			return(-1);
 		i++;
 	}
-	i = 0;
-	while (s[i] == '\0')  // FIXME: changer c en 0 , erreure ?
-	{
-		if (i == BUFFER_SIZE)
-			return(-1);   //si rien dans buf, que des 0, return -1
-		i++;
-	}
+	// i = 0;
+	// while (s[i] == '\0')  // changer c en 0 , erreure ?
+	// {
+	// 	if (i == BUFFER_SIZE - 1)  //FIXME: 
+	// 		return(-1);   //si rien dans buf, que des 0, return -1
+	// 	i++;
+	// }
 	return (BUFFER_SIZE); // si pas de \n mais char trouvé
 }
 
@@ -47,7 +49,7 @@ int	ft_buf_process(char *bufp, int ret)
 		i++;
 	}
 	*bufp = '\0';
-	ret = ret + 1;
+	ret = ret + 1;  // POUR TRIPUIOLLE FLAG
 	//i = BUFFER_SIZE;
 	// if (ret <= BUFFER_SIZE) // FIXME:
 	// {
@@ -77,7 +79,7 @@ char	*get_next_line(int fd)
 		line = ft_strjoin_gnl(line, buf, eol);
 		ft_buf_process(buf, ret); // met a zero jusquau \n
 	}
-	while ((ft_strichr(buf, '\n') == BUFFER_SIZE || ft_strichr(buf, '\n') == -1))	// boucle tant que pas de \n ou ret 0 FIXME: ret buff attention
+	while ((eol == BUFFER_SIZE || eol != -1))	// boucle tant que pas de \n ou ret 0 FIXME: ret buff attention
 	{
 		ret = read(fd, buf, BUFFER_SIZE);	// protege un cas error si read -1
 		if (ret <= 0)

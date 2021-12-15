@@ -6,11 +6,11 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 17:31:54 by bducrocq          #+#    #+#             */
-/*   Updated: 2021/12/15 16:32:33 by bducrocq         ###   ########.fr       */
+/*   Updated: 2021/12/15 17:39:26 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#define PATH path4
+#define PATH path1
 #include "get_next_line.h"
 // /*fonctions pour changer couleur des print f*/
 void red () { printf("\033[1;31m"); }
@@ -40,7 +40,7 @@ int	main(void)
 		printf("fd : %d\n\n", fd);
 
 	reset();
-	while((str = get_next_line(fd)) /*&& i < 13*/)
+	while((str = get_next_line(fd)) != NULL)
 	{
 		cyan();
 		printf("%.2d |", i);
