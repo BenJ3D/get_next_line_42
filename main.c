@@ -6,11 +6,11 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 17:31:54 by bducrocq          #+#    #+#             */
-/*   Updated: 2021/12/14 18:14:41 by bducrocq         ###   ########.fr       */
+/*   Updated: 2021/12/15 16:32:33 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#define PATH path1
+#define PATH path4
 #include "get_next_line.h"
 // /*fonctions pour changer couleur des print f*/
 void red () { printf("\033[1;31m"); }
@@ -29,6 +29,7 @@ int	main(void)
 	char	path2[] = "./bible.txt";
 	char	path3[] = "./a";
 	char	path1[] = "./42";
+	char	path4[] = "./bigline";
 	int	i = 1; // compte les lignes
 	char *str;
 

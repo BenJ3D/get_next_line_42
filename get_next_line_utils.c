@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 18:33:21 by bducrocq          #+#    #+#             */
-/*   Updated: 2021/12/11 14:24:17 by marvin           ###   ########.fr       */
+/*   Updated: 2021/12/15 16:35:23 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static size_t	ft_strlen(const char *str)
 	return (i);
 }
 
-char	*ft_strjoin_gnl(char *s1, char *s2, int buf_end)
+char	*ft_strjoin_gnl(char *s1, char *s2, int buf_end)  // FIXME: norme !!
 {
 	long	i;
 	long	j;
