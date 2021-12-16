@@ -11,6 +11,15 @@
                 "-g"
             ],
             "isShellCommand": true,
+        },
+		{
+            "taskName": "build hello",
+            "command": "gcc",
+            "args": [
+                "hello.c",
+                "-g"
+            ],
+            "isShellCommand": true,
         }
     ]
 }

@@ -1,5 +1,9 @@
 {
     "files.associations": {
-        "libft.h": "c"
-    }
+		"libft.h": "c",
+		"sstream": "c"
+	},
+	"lldb.displayFormat": "auto",
+	"lldb.showDisassembly": "auto",
+	"lldb.dereferencePointers": false
 }
