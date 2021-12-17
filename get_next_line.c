@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 20:00:04 by bducrocq          #+#    #+#             */
-/*   Updated: 2021/12/15 18:21:49 by bducrocq         ###   ########.fr       */
+/*   Updated: 2021/12/15 19:11:55 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	ft_strichr(char *s, int c)	// analyse buff qui peut commencer par des 0
 	return (BUFFER_SIZE); // si pas de \n mais char trouvé
 }
 
-int	ft_buf_process(char *bufp, int ret)
+int	ft_buf_process(char *bufp, int ret) // met des zero jusquau \n
 {
 	int	i;
 
@@ -86,7 +86,7 @@ char	*get_next_line(int fd)
 			return (NULL);
 		while (ret != BUFFER_SIZE)
 		{
-			buf[ret] = '\0'; // TODO: mettre a zero jusqua buffer size	 
+			buf[ret] = '\0'; // TODO: mettre a zero jusqua buffer size
 			ret++;
 		}
 		eol = ft_strichr(buf, '\n');
