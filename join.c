@@ -43,15 +43,15 @@ void	modify(char **str)
 
 
 	i = 0;
-	if(*str)
-		free(str);
+	//if(str)
+	//	free(str);
 	*str = malloc(sizeof(char) * (b + 1));
 	while (i < b)
 	{
 		str[0][i] = 'A';
 		i++;
 	}
-	str[i] = '\0';
+	str[0][i] = '\0';
 //	printf("%s\n", str);
 }
 
