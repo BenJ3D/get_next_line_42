@@ -25,13 +25,6 @@ int	ft_strichr(char *s, int c)	// analyse buff qui peut commencer par des 0
 			return(-1);
 		i++;
 	}
-	// i = 0;
-	// while (s[i] == '\0')  // changer c en 0 , erreure ?
-	// {
-	// 	if (i == BUFFER_SIZE - 1)  //FIXME: 
-	// 		return(-1);   //si rien dans buf, que des 0, return -1
-	// 	i++;
-	// }
 	return (BUFFER_SIZE); // si pas de \n mais char trouvé
 }
 
@@ -50,15 +43,6 @@ int	ft_buf_process(char *bufp, int ret) // met des zero jusquau \n
 	}
 	*bufp = '\0';
 	ret = ret + 1;  // POUR TRIPUIOLLE FLAG
-	//i = BUFFER_SIZE;
-	// if (ret <= BUFFER_SIZE) // FIXME:
-	// {
-	// 	while (i > ret) //TODO: idee de mettre des zero par la droite pour cas fin de fichier
-	// 	{
-	// 		bufp[i] = '\0';
-	// 		i--;
-	// 	}
-	// }
 	return (ft_strichr(bufp, '\n'));
 }
 
@@ -67,16 +51,16 @@ char	*get_next_line(int fd)
 	static char 	buf[BUFFER_SIZE + 1];
 	int				ret;
 	int				eol;
-	char			*line;
+	char			**line;
 
 	ret = 1;
-	line = ft_strdup("");
+	*line = ft_strdup("");
 	eol = ft_strichr(buf, '\n');
 	if (ft_strichr(buf, '\n') != BUFFER_SIZE && eol != -1)
-		line = ft_strjoin_gnl(line, buf, eol);
+		ft_strjoin_gnl(&line, buf, eol);
 	if (eol == BUFFER_SIZE)
 	{
-		line = ft_strjoin_gnl(line, buf, eol);
+		ft_strjoin_gnl(&line, buf, eol);
 		ft_buf_process(buf, ret); // met a zero jusquau \n
 	}
 	while ((eol == BUFFER_SIZE || eol != -1))	// boucle tant que pas de \n ou ret 0 FIXME: ret buff attention
@@ -90,7 +74,7 @@ char	*get_next_line(int fd)
 			ret++;
 		}
 		eol = ft_strichr(buf, '\n');
-		line = ft_strjoin_gnl(line, buf, eol);
+		ft_strjoin_gnl(&line, buf, eol);
 		// if (ret < BUFFER_SIZE)
 		// 	return(line); // modifier le joint pour prendre en compte lindex
 	}

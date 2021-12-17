@@ -26,7 +26,8 @@
 //# include "./includes/libft.h"
 
 char			*get_next_line(int fd);
-char			*ft_strjoin_gnl(char *s1, char *s2, int buf_end);
+//char			*ft_strjoin_gnl(char *s1, char *s2, int buf_end);
+void			ft_strjoin_gnl(char **dst, char *src1, char *src2, int buf_end);
 // int				ft_buf_process(char *bufp);
 int	ft_buf_process(char *bufp, int ret);
 int				ft_strichr(char *s, int c);

@@ -24,37 +24,30 @@ static size_t	ft_strlen(const char *str)
 	return (i);
 }
 
-char	*ft_strjoin_gnl(char *s1, char *s2, int buf_end)  // FIXME: norme !!
-{
-	long	i;
-	long	j;
-	char	*str;
-	long	len_s2;
+void	ft_strjoin_gnl(char **dst, char *src1, char *src2, int buf_end)
+ {
+	int	i;
+	int	j;
+	int	srcslen;
 
 	i = 0;
-	while (*s2 == '\0' && i < BUFFER_SIZE)
-	{
-		s2++;
+	while(src1[i])
 		i++;
-	}
-	if (buf_end != BUFFER_SIZE)
-		len_s2 = i;
-	len_s2 = buf_end - i;
-	i = 0;
-	str = ft_calloc((ft_strlen(s1) + (len_s2) + 1), sizeof(char*));
-	if (!str)
-		return (NULL);
-	i = 0;
+	srcslen = i;
+	while(src2[i])
+		i++;
+	srcslen = srcslen + i;
+	*dst = malloc(sizeof(char) * srcslen + 1);
 	j = 0;
-	while (s1[i])
-		str[j++] = s1[i++];
 	i = 0;
-	while (i <= len_s2)
-		str[j++] = s2[i++];
-	str[j] = '\0';
-	free(s1);
-	return (str);
-}
+	while (src1[i])
+		dst[0][j++] = src1[i++];
+	i = 0;
+	while (src2[i])
+		dst[0][j++] = src2[i++];
+	dst[0][j] = '\0';
+ }
+
 void	*ft_calloc(size_t count, size_t size)
 {
 	void	*ptr;
