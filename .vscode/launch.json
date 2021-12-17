@@ -5,7 +5,7 @@
 		{
             "type": "lldb",
             "request": "launch",
-            "name": "Debug hello",
+            "name": "Debug join",
             "program": "${workspaceFolder}/a.out",
             "args": [],
             "cwd": "${workspaceFolder}",

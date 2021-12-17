@@ -16,7 +16,7 @@
             "taskName": "build hello",
             "command": "gcc",
             "args": [
-                "hello.c",
+                "join.c",
                 "-g"
             ],
             "isShellCommand": true,
