@@ -60,8 +60,7 @@ int main()
 {
 	char    message[] = "salut les gens, ";
 	char    sms[] = "comment allez-vous ?";
-	int		total;
-	char	*dstjoin = NULL;
+	char	*dstjoin;
 
 	
 	printf("message 1 : %s\n", message);
