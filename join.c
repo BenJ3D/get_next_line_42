@@ -36,35 +36,39 @@ int	ft_strlen(char *str)
 	return(i);
 }
 
-char	modify(char *str)
+void	modify(char **str)
 {
-	int	i;
+	int		i;
+	int		b = 15;
+
 
 	i = 0;
-	str = malloc(sizeof(char) * 600);
-	while (str[i])
+	if(*str)
+		free(str);
+	*str = malloc(sizeof(char) * (b + 1));
+	while (i < b)
 	{
-		str[i] = 'A';
+		str[0][i] = 'A';
 		i++;
 	}
+	str[i] = '\0';
+//	printf("%s\n", str);
 }
 
 int main()
 {
-	char    message[] = "salut les gens, ";
-	char    sms[] = "comment allez vous";
+//	char    message[] = "salut les gens, ";
+//	char    sms[] = "comment allez vous";
 	int		total;
-	char	*dstjoin;
+	char	*dstjoin = NULL;
 
 	
 	// printf("%s\n", message);
 	// printf("%s\n", sms);
 	// ft_join(&dstjoin, message, sms);
-	// printf("le join %s\n", dstjoin[0][0]);
-
-	total = 
 	printf("le join %s\n", dstjoin);
-	dstjoin = modify(dstjoin);
+
+	modify(&dstjoin);
 	printf("le join %s\n", dstjoin);
 	//free(dstjoin);
 	return (0);
