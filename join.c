@@ -43,8 +43,8 @@ void	modify(char **str)
 
 
 	i = 0;
-	//if(str)
-	//	free(str);
+	if(str)
+		free(str);
 	*str = malloc(sizeof(char) * (b + 1));
 	while (i < b)
 	{
