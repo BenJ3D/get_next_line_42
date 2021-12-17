@@ -20,6 +20,7 @@ void ft_join(char *dst, char *src1, char *src2)
 	dst = malloc(sizeof(char) * (srclen + src2len + 1));
 	j = 0;
 	i = 0;
+
 	while (src1[i])
 		dst[j++] = src1[i++];
 	i = 0;
