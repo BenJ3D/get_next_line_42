@@ -13,16 +13,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void modifystr(char *str, char *dest)
+void modifystr(char *str, char **dest)
 {
 
     int i;
     
     i = 0;
+	*dest = malloc(sizeof(char) * 1000);
     while(i < 10)
     {
         str[i] = 'A';
-        dest[i] = 'B';
+        dest[0][i] = 'B';
         i++;
     }
 }
@@ -30,14 +31,14 @@ void modifystr(char *str, char *dest)
 int main()
 {
     static char    line[12];
-    char    *dest;
+    char    **dest;
     
-    dest = malloc(sizeof(char) * 1000);
+    
     printf("avant  %s\n", line);
-    printf("avant  %s\n", dest);
-    modifystr(line, dest);
+    printf("avant  %s\n", dest[0]);
+    modifystr(line, &dest);
     printf("apres  %s\n", line);
-    printf("apres  %s\n", dest);
+    printf("apres  %s\n", dest[0]);
 
     return 0;
 }
