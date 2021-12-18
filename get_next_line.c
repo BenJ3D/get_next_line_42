@@ -46,23 +46,29 @@ int	ft_buf_process(char *bufp, int ret) // met des zero jusquau \n
 	return (ft_strichr(bufp, '\n'));
 }
 
+void	ft_read(int	*fd, int *ret, char **buf)
+{
+	while (1)	// boucle tant que pas de \n ou ret 0 FIXME: ret buff attention
+	{
+		ret = read(fd, buf, BUFFER_SIZE);	// protege un cas error si read -1
+		if (ret <= 0)
+			return (NULL);
+		while (ret != BUFFER_SIZE)
+		{
+			buf[ret] = '\0'; // TODO: mettre a zero jusqua buffer size
+			ret++;
+		}
+	}
+
+}
 char	*get_next_line(int fd)
 {	
 	static char 	buf[BUFFER_SIZE + 1];
-	int				ret;
+	int				*ret;
 	int				eol;
 	char			**line;
 
-	ret = 1;
 	*line = ft_strdup("");
-	eol = ft_strichr(buf, '\n');
-	if (ft_strichr(buf, '\n') != BUFFER_SIZE && eol != -1)
-		ft_strjoin_gnl(&line, buf, eol);
-	if (eol == BUFFER_SIZE)
-	{
-		ft_strjoin_gnl(&line, buf, eol);
-		ft_buf_process(buf, ret); // met a zero jusquau \n
-	}
 	while ((eol == BUFFER_SIZE || eol != -1))	// boucle tant que pas de \n ou ret 0 FIXME: ret buff attention
 	{
 		ret = read(fd, buf, BUFFER_SIZE);	// protege un cas error si read -1
