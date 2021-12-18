@@ -19,6 +19,8 @@ void modifystr(char *str, char **dest)
     int i;
     
     i = 0;
+	// if(*dest)
+	// 	free(*dest);
 	*dest = malloc(sizeof(char) * 1000);
     while(i < 10)
     {
@@ -26,19 +28,27 @@ void modifystr(char *str, char **dest)
         dest[0][i] = 'B';
         i++;
     }
+	dest[0][i] = '\0';
 }
 
+
+void modifyint(int **n, int swap)
+{
+	**n = swap;
+}
 int main()
 {
     static char    line[12];
-    char    **dest;
+    char    *dest;
+	int		*nb;
     
-    
-    printf("avant  %s\n", line);
-    printf("avant  %s\n", dest[0]);
+	//nb[0] = 13;
     modifystr(line, &dest);
     printf("apres  %s\n", line);
-    printf("apres  %s\n", dest[0]);
-
+    printf("apres  %s\n", dest);
+	//free(dest);
+    // printf("int  %d\n", *nb);
+	// modifyint(&nb, 42);
+    // printf("int  %d\n", *nb);
     return 0;
 }

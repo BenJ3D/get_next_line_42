@@ -40,15 +40,17 @@ int	main(void)
 		printf("fd : %d\n\n", fd);
 
 	reset();
-	while((str = get_next_line(fd)) != NULL)
-	{
-		cyan();
-		printf("%.2d |", i);
-		reset();
-		printf("%s", str);
-		free(str);
-		i++;
-	}
+	str = get_next_line(fd);
+	printf("%s", str);
+	// while((str = get_next_line(fd)) != NULL)
+	// {
+	// 	cyan();
+	// 	printf("%.2d |", i);
+	// 	reset();
+	// 	printf("%s", str);
+	// 	free(str);
+	// 	i++;
+	// }
 	printf("%s", str);
 	close(fd);
 	// printf("1er appel :\n%s\n", get_next_line(fd));
