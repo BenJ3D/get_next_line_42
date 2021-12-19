@@ -52,6 +52,7 @@ int	main(void)
 	// 	i++;
 	// }
 	printf("%s", str);
+	free(str);
 	close(fd);
 	// printf("1er appel :\n%s\n", get_next_line(fd));
 	// printf("2nd appel :\n%s\n", get_next_line(fd));
