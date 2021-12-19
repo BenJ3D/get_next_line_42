@@ -83,17 +83,20 @@ int	ft_read(int	fd, int ret, char *buf, char **line)
 			*line = ft_strdup("ret est inférieur à buf size, fin de fichier a gerer");
 			break ;
 		}
-		if (chr_result >= 0) // nl trouvé
+		if (chr_result >= 0)
+		{
 			*line = ft_strdup("buf contient une nl");
+			break ;
+		} // nl trouvé
 		if (chr_result == -1) // char trouvé sans nl
 		{
-			ft_strjoin_gnl(&*line, *line, buf, BUFFER_SIZE);
+			//*line = ft_strdup("coucou comment tu vas j'ai limpression que le join marche bien");
+			ft_strjoin_gnl(&*line, *line, buf, BUFFER_SIZE); // FIXME:
 			break ;
 		}
 		if (chr_result == -2) // chaine vide
 			*line = ft_strdup("buf est NULL");
 	}
-	//printf("%d", chr_result);
 	return(ret);
 }
 
@@ -103,6 +106,9 @@ char	*get_next_line(int fd)
 	int				ret;
 	char			*line;
 
+	line = ft_strdup("");
+	printf("%s\n", line);
+	
 	while(1)
 	{
 		ret = ft_read(fd, ret, buf, &line);

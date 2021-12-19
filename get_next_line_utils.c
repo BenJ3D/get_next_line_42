@@ -24,23 +24,24 @@ static size_t	ft_strlen(char *str)
 	return (i);
 }
 
-void	ft_strjoin_gnl(char **dst, char *src1, char *src2, int buf_end)
+void	ft_strjoin_gnl(char **dst, char *line2, char *buf2, int buf_end)
  {
 	size_t	i;
 	size_t	j;
 	size_t	srcslen;
 
-	srcslen = ft_strlen(src1);
-	srcslen = srcslen + ft_strlen(src2);
+	srcslen = ft_strlen(line2);
+	srcslen = srcslen + ft_strlen(buf2);
 	*dst = malloc(sizeof(char) * srcslen + 1);
 	j = 0;
 	i = 0;
-	while (src1[i])
-		dst[0][j++] = src1[i++];
+	while (line2[i])
+		dst[0][j++] = line2[i++];
 	i = 0;
-	while (src2[i])
-		dst[0][j++] = src2[i++];
+	while (buf2[i])
+		dst[0][j++] = buf2[i++];
 	dst[0][j] = '\0';
+	free(line2);
  }
 
 void	*ft_calloc(size_t count, size_t size)
