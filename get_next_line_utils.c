@@ -23,13 +23,51 @@ size_t	ft_strlen_gnl(char *str)
 	}
 	return (i);
 }
+char	*ft_strjoin_gnl(char *s1, char *s2, int buf_end)
+{
+	long	i;
+	long	j;
+	char	*str;
+	long	len_s2;
 
+	i = 0;
+	while (*s2 == '\0' && i < BUFFER_SIZE)
+	{
+		s2++;
+		i++;
+	}
+	if (buf_end != BUFFER_SIZE)
+		len_s2 = i;
+	len_s2 = buf_end - i;
+	i = 0;
+	str = ft_calloc((ft_strlen(s1) + (len_s2) + 1), sizeof(char*));
+	if (!str)
+		return (NULL);
+	i = 0;
+	j = 0;
+	while (s1[i])
+		str[j++] = s1[i++];
+	i = 0;
+	while (i <= len_s2)
+		str[j++] = s2[i++];
+	str[j] = '\0';
+	free(s1);
+	return (str);
+}
 void	ft_strjoin_gnl(char **dst, char *line2, char *buf2, int buf_end)
  {
 	size_t	i;
 	size_t	j;
 	size_t	srcslen;
-
+	
+	i = 0;
+	while (*buf2 == '\0' && i < BUFFER_SIZE) // FIXME:
+	{
+		buf2++;
+		i++;
+	}
+	if (buf_end != BUFFER_SIZE)
+		len_s2 = i;
 	srcslen = ft_strlen_gnl(line2);
 	srcslen = srcslen + ft_strlen_gnl(buf2);
 	*dst = malloc(sizeof(char) * srcslen + 1);
