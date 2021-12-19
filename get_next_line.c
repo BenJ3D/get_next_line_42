@@ -87,7 +87,7 @@ int	ft_read(int	fd, int ret, char *buf, char **line)
 			//*line = ft_strdup("buf contient une nl");
 			break ;
 		} // nl trouvé
-		if (chr_result == -1 || chr_result == -3 && (ret >= BUFFER_SIZE)) // char trouvé sans nl
+		if ((chr_result == -1 || chr_result == -3) && ret >= BUFFER_SIZE) // char trouvé sans nl
 		{
 			ft_strjoin_gnl(&*line, *line, buf, BUFFER_SIZE); // FIXME:
 			ft_buf_process(buf, ret);
