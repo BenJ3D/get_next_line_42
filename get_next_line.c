@@ -96,7 +96,7 @@ int	ft_read(int	fd, int ret, char *buf, char **line)
 
 char	*get_next_line(int fd)
 {	
-	static char 	buf[BUFFER_SIZE + 1] = NULL;
+	static char 	buf[BUFFER_SIZE + 1];
 	int				ret;
 	char			*line;
 
