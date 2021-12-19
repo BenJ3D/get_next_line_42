@@ -17,7 +17,11 @@ int	ft_strichr_nl(char *str)	// analyse buff qui peut commencer par des 0
 	int	i;
 
 	i = 0;
-	while (i < BUFFER_SIZE)  // FIXME:
+
+	if (BUFFER_SIZE == 1 && str[i] != '\n')		//renvoi -3 si nl trouvé avec buffsize a 1
+		return (-3);
+	i = 0;
+	while (i <= BUFFER_SIZE)  // FIXME:
 	{
 		if (str[i] == '\n')		//renvoi i si nl trouvé
 			return (i);
@@ -75,15 +79,15 @@ int	ft_read(int	fd, int ret, char *buf, char **line)
 		chr_result = ft_strichr_nl(buf);		// return >= 0 pour position \n // -1 si char trouvé sans nl // -2 si vide
 		if (ret < BUFFER_SIZE) // moins de char lu que buffer_size donc fin de fichier
 		{
-			ft_strjoin_gnl(&*line, *line, buf, BUFFER_SIZE); // FIXME:
+			ft_strjoin_gnl(&*line, *line, buf, BUFFER_SIZE);
 			break ;
 		}
 		if (chr_result >= 0 && ret >= BUFFER_SIZE)
 		{
-			*line = ft_strdup("buf contient une nl");
+			//*line = ft_strdup("buf contient une nl");
 			break ;
 		} // nl trouvé
-		if (chr_result == -1 && ret >= BUFFER_SIZE) // char trouvé sans nl
+		if (chr_result == -1 || chr_result == -3 && (ret >= BUFFER_SIZE)) // char trouvé sans nl
 		{
 			ft_strjoin_gnl(&*line, *line, buf, BUFFER_SIZE); // FIXME:
 			ft_buf_process(buf, ret);
