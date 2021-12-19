@@ -45,6 +45,7 @@ void	modify(char **str)
 	i = 0;
 	if(*str)
 		free(*str);
+	
 	*str = malloc(sizeof(char) * (b + 1));
 	while (i < b)
 	{
@@ -58,18 +59,17 @@ void	modify(char **str)
 int main()
 {
 	char    message[] = "salut les gens, ";
-	char    sms[] = "comment allez vous";
-	int		total;
-	char	*dstjoin = NULL;
+	char    sms[] = "comment allez-vous ?";
+	char	*dstjoin;
 
 	
-	printf("%s\n", message);
-	printf("%s\n", sms);
+	printf("message 1 : %s\n", message);
+	printf("message 2 : %s\n", sms);
 	ft_join_gnl(&dstjoin, message, sms);
-	printf("le join %s\n", dstjoin);
+	printf("resultat join : %s\n", dstjoin);
 
 	modify(&dstjoin);
-	printf("modify %s\n", dstjoin);
+	printf("ft modify met que des A : %s\n", dstjoin);
 	free(dstjoin);
 	return (0);
 }
