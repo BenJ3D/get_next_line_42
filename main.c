@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#define PATH path4
+#define PATH path1
 #include "get_next_line.h"
 // /*fonctions pour changer couleur des print f*/
 void red () { printf("\033[1;31m"); }
@@ -40,9 +40,8 @@ int	main(void)
 		printf("fd : %d\n\n", fd);
 
 	reset();
-	str = get_next_line(fd);
-	//printf("%s", str);
-	// while((str = get_next_line(fd)) != NULL)
+	printf("%s", str);
+	// while((str = get_next_line(fd)) != NULL && i < 42)
 	// {
 	// 	cyan();
 	// 	printf("%.2d |", i);
@@ -51,6 +50,17 @@ int	main(void)
 	// 	free(str);
 	// 	i++;
 	// }
+	str = get_next_line(fd);
+	printf("%s", str);
+	str = get_next_line(fd);
+	printf("%s", str);
+	str = get_next_line(fd);
+	printf("%s", str);
+		str = get_next_line(fd);
+	printf("%s", str);
+	str = get_next_line(fd);
+	printf("%s", str);
+	str = get_next_line(fd);
 	printf("%s", str);
 	free(str);
 	close(fd);
