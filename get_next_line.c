@@ -90,7 +90,6 @@ int	ft_read(int	fd, int ret, char *buf, char **line)
 		} // nl trouvé
 		if (chr_result == -1) // char trouvé sans nl
 		{
-			//*line = ft_strdup("coucou comment tu vas j'ai limpression que le join marche bien");
 			ft_strjoin_gnl(&*line, *line, buf, BUFFER_SIZE); // FIXME:
 			break ;
 		}
