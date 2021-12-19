@@ -11,6 +11,16 @@
                 "-g"
             ],
             "isShellCommand": true,
+        },
+		{
+            "taskName": "build_test",
+            "command": "gcc",
+            "args": [
+                "test.c",
+                "./includes/libft.a",
+                "-g"
+            ],
+            "isShellCommand": true,
         }
     ]
 }

@@ -12,7 +12,22 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
+# endif
 
+int	ft_check_is_empty(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (i <= BUFFER_SIZE)
+	{
+		if (str[i++] != '\0')
+			return (0);
+	}
+	return(1);
+}
 void modifystr(char *str, char **dest)
 {
 
@@ -38,17 +53,27 @@ void modifyint(int **n, int swap)
 }
 int main()
 {
-    static char    line[12];
-    char    *dest;
-	int		*nb;
-    
-	//nb[0] = 13;
-    modifystr(line, &dest);
-    printf("apres  %s\n", line);
-    printf("apres  %s\n", dest);
-	//free(dest);
-    // printf("int  %d\n", *nb);
-	// modifyint(&nb, 42);
-    // printf("int  %d\n", *nb);
-    return 0;
+	static char buf[BUFFER_SIZE + 1];
+	int i = 0;
+
+
+	buf[35] = 'A';
+	printf("%d\n", ft_check_is_empty(buf));
+	return(0);
 }
+// int main()
+// {
+//     static char    line[12];
+//     char    *dest;
+// 	int		*nb;
+    
+// 	//nb[0] = 13;
+//     modifystr(line, &dest);
+//     printf("apres  %s\n", line);
+//     printf("apres  %s\n", dest);
+// 	free(dest);
+//     // printf("int  %d\n", *nb);
+// 	// modifyint(&nb, 42);
+//     // printf("int  %d\n", *nb);
+//     return 0;
+// }

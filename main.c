@@ -35,13 +35,13 @@ int	main(void)
 
 	fd = open(PATH, O_RDONLY);
 	// fd = 2;
-		purple();
+		cyan();
 	printf("\nBUFFER_SIZE = : %d\n", BUFFER_SIZE);
 		printf("fd : %d\n\n", fd);
 
 	reset();
 	str = get_next_line(fd);
-	printf("%s", str);
+	//printf("%s", str);
 	// while((str = get_next_line(fd)) != NULL)
 	// {
 	// 	cyan();
