@@ -1,7 +1,7 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
-
+/* fichier test fonctions */
 void ft_join_gnl(char **dst, char *src1, char *src2)
  {
 	int	i;
