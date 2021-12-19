@@ -75,17 +75,19 @@ int	ft_read(int	fd, int ret, char *buf, char **line)
 	chr_result = -1;
 	while(chr_result < 0)
 	{
-		// if (ft_strichr_nl >= 0)
+
 		ret = read(fd, buf, BUFFER_SIZE);
-		chr_result = ft_strichr_nl(buf);		// return >= 0 pour position \n // -1 si char trouvé sans nl // -2 si vide
+		chr_result = ft_strichr_nl(buf);	// return >= 0 pour position \n // -1 si char trouvé sans nl // -2 si vide
 		if (ret < BUFFER_SIZE) // moins de char lu que buffer_size donc fin de fichier
 		{
-			ft_strjoin_gnl(&*line, *line, buf, ft_strlen_gnl(buf));
+			//ft_strjoin_gnl(&*line, *line, buf, ft_strlen_gnl(buf));
 			break ;
 		}
 		if (chr_result >= 0 && ret >= BUFFER_SIZE)
 		{
-			ft_strjoin_gnl(&*line, *line, buf, chr_result); // FIXME:
+			ft_strjoin_gnl(&*line, *line, buf, chr_result + 1);
+			ft_buf_process(buf, 0);
+			 // FIXME: -1 ptre
 			break ;
 		} // nl trouvé
 		if ((chr_result == -1 || chr_result == -3) && ret >= BUFFER_SIZE) // char trouvé sans nl
@@ -97,7 +99,7 @@ int	ft_read(int	fd, int ret, char *buf, char **line)
 			*line = ft_strdup("buf est NULL");
 		//ft_strjoin_gnl(&*line, *line, buf, BUFFER_SIZE); //TODO: pour la norme supr if au dessus
 	}
-	ft_buf_process(buf, 0);
+	//ft_buf_process(buf, 0);
 	return(ret);
 }
 
@@ -108,8 +110,13 @@ char	*get_next_line(int fd)
 	char			*line;
 
 	line = ft_strdup("");
-	printf("%s\n", line);
-	
+	//printf("%s\n", line); // FIXME:
+	if (ft_strichr_nl(buf) >= 0)
+	{
+		ft_strjoin_gnl(&line, line, buf, BUFFER_SIZE); // FIXME:
+		ft_buf_process(buf, ft_strichr_nl(buf));
+		return(line);
+	}
 	while(1)
 	{
 		ret = ft_read(fd, ret, buf, &line);

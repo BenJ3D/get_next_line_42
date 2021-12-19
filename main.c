@@ -38,30 +38,32 @@ int	main(void)
 		cyan();
 	printf("\nBUFFER_SIZE = : %d\n", BUFFER_SIZE);
 		printf("fd : %d\n\n", fd);
+		printf("path : %s\n\n", PATH);
+	
 
 	reset();
-	printf("%s", str);
-	// while((str = get_next_line(fd)) != NULL && i < 42)
-	// {
-	// 	cyan();
-	// 	printf("%.2d |", i);
-	// 	reset();
-	// 	printf("%s", str);
-	// 	free(str);
-	// 	i++;
-	// }
-	str = get_next_line(fd);
-	printf("%s", str);
-	str = get_next_line(fd);
-	printf("%s", str);
-	str = get_next_line(fd);
-	printf("%s", str);
-		str = get_next_line(fd);
-	printf("%s", str);
-	str = get_next_line(fd);
-	printf("%s", str);
-	str = get_next_line(fd);
-	printf("%s", str);
+	//printf("%s", str);
+	while((str = get_next_line(fd)) != NULL && i < 42)
+	{
+		cyan();
+		printf("%.2d |", i);
+		reset();
+		printf("%s", str);
+		free(str);
+		i++;
+	}
+	// str = get_next_line(fd);
+	// printf("%s", str);
+	// str = get_next_line(fd);
+	// printf("%s", str);
+	// str = get_next_line(fd);
+	// printf("%s", str);
+	// 	str = get_next_line(fd);
+	// printf("%s", str);
+	// str = get_next_line(fd);
+	// printf("%s", str);
+	// str = get_next_line(fd);
+	// printf("%s", str);
 	free(str);
 	close(fd);
 	// printf("1er appel :\n%s\n", get_next_line(fd));
