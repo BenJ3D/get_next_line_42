@@ -12,7 +12,7 @@
 
 #include "get_next_line.h"
 
-static size_t	ft_strlen(const char *str)
+static size_t	ft_strlen(char *str)
 {
 	size_t	i;
 
