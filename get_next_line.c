@@ -17,7 +17,7 @@ int	ft_strichr_nl(char *str)	// analyse buff qui peut commencer par des 0
 	int	i;
 
 	i = 0;
-	while (i < BUFFER_SIZE)
+	while (i < BUFFER_SIZE)  // FIXME:
 	{
 		if (str[i] == '\n')		//renvoi i si nl trouvé
 			return (i);
@@ -30,7 +30,7 @@ int	ft_strichr_nl(char *str)	// analyse buff qui peut commencer par des 0
 			return (-1);
 		i++;
 	}
-	return (-2); // renvoi -1 si completement vide
+	return (-2); // renvoi -2 si completement vide
 }
 
 int	ft_check_is_empty(char *str) //renvoi 1 si non vide
@@ -51,11 +51,6 @@ int	ft_buf_process(char *bufp, int ret) // met des zero jusquau \n
 	int	i;
 
 	i = 0;
-	if (ret < BUFFER_SIZE)
-	{
-		
-
-	}
 	while (*bufp != '\n')
 	{
 		if (i == BUFFER_SIZE)//FIXME: attention
@@ -66,7 +61,7 @@ int	ft_buf_process(char *bufp, int ret) // met des zero jusquau \n
 	}
 	*bufp = '\0';
 	ret = ret + 1;  // POUR TRIPUIOLLE FLAG
-	return (ft_strichr_nl(bufp));
+	return (0);
 }
 
 int	ft_read(int	fd, int ret, char *buf, char **line)
@@ -80,21 +75,22 @@ int	ft_read(int	fd, int ret, char *buf, char **line)
 		chr_result = ft_strichr_nl(buf);		// return >= 0 pour position \n // -1 si char trouvé sans nl // -2 si vide
 		if (ret < BUFFER_SIZE) // moins de char lu que buffer_size donc fin de fichier
 		{
-			*line = ft_strdup("ret est inférieur à buf size, fin de fichier a gerer");
+			ft_strjoin_gnl(&*line, *line, buf, BUFFER_SIZE); // FIXME:
 			break ;
 		}
-		if (chr_result >= 0)
+		if (chr_result >= 0 && ret >= BUFFER_SIZE)
 		{
 			*line = ft_strdup("buf contient une nl");
 			break ;
 		} // nl trouvé
-		if (chr_result == -1) // char trouvé sans nl
+		if (chr_result == -1 && ret >= BUFFER_SIZE) // char trouvé sans nl
 		{
 			ft_strjoin_gnl(&*line, *line, buf, BUFFER_SIZE); // FIXME:
-			break ;
+			ft_buf_process(buf, ret);
 		}
-		if (chr_result == -2) // chaine vide
+		if (chr_result == -2 && ret >= BUFFER_SIZE) // chaine vide
 			*line = ft_strdup("buf est NULL");
+		//ft_strjoin_gnl(&*line, *line, buf, BUFFER_SIZE); //TODO: pour la norme supr if au dessus
 	}
 	return(ret);
 }
