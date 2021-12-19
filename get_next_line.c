@@ -57,7 +57,7 @@ int	ft_buf_process(char *bufp, int ret) // met des zero jusquau \n
 	i = 0;
 	while (*bufp != '\n')
 	{
-		if (i <= BUFFER_SIZE)//FIXME: attention
+		if (ret <= BUFFER_SIZE)//FIXME: attention
 			break ;
 		*bufp = '\0';
 		bufp++;
@@ -75,17 +75,18 @@ int	ft_read(int	fd, int ret, char *buf, char **line)
 	chr_result = -1;
 	while(chr_result < 0)
 	{
+		// if (ft_strichr_nl >= 0)
 		ret = read(fd, buf, BUFFER_SIZE);
 		chr_result = ft_strichr_nl(buf);		// return >= 0 pour position \n // -1 si char trouvé sans nl // -2 si vide
 		if (ret < BUFFER_SIZE) // moins de char lu que buffer_size donc fin de fichier
 		{
-			ft_strjoin_gnl(&*line, *line, buf, BUFFER_SIZE);
+			ft_strjoin_gnl(&*line, *line, buf, ft_strlen_gnl(buf));
 			break ;
 		}
 		if (chr_result >= 0 && ret >= BUFFER_SIZE)
 		{
 			ft_strjoin_gnl(&*line, *line, buf, chr_result); // FIXME:
-			ft_buf_process(buf, 0);
+			break ;
 		} // nl trouvé
 		if ((chr_result == -1 || chr_result == -3) && ret >= BUFFER_SIZE) // char trouvé sans nl
 		{
@@ -96,6 +97,7 @@ int	ft_read(int	fd, int ret, char *buf, char **line)
 			*line = ft_strdup("buf est NULL");
 		//ft_strjoin_gnl(&*line, *line, buf, BUFFER_SIZE); //TODO: pour la norme supr if au dessus
 	}
+	ft_buf_process(buf, 0);
 	return(ret);
 }
 
