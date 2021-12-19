@@ -26,17 +26,12 @@ static size_t	ft_strlen(const char *str)
 
 void	ft_strjoin_gnl(char **dst, char *src1, char *src2, int buf_end)
  {
-	int	i;
-	int	j;
-	int	srcslen;
+	size_t	i;
+	size_t	j;
+	size_t	srcslen;
 
-	i = 0;
-	while(src1[i])
-		i++;
-	srcslen = i;
-	while(src2[i])
-		i++;
-	srcslen = srcslen + i;
+	srcslen = ft_strlen(src1);
+	srcslen = srcslen + ft_strlen(src2);
 	*dst = malloc(sizeof(char) * srcslen + 1);
 	j = 0;
 	i = 0;
