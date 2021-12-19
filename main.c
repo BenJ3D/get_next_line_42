@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#define PATH path1
+#define PATH path4
 #include "get_next_line.h"
 // /*fonctions pour changer couleur des print f*/
 void red () { printf("\033[1;31m"); }

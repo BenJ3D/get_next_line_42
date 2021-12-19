@@ -85,8 +85,11 @@ int	ft_read(int	fd, int ret, char *buf, char **line)
 		}
 		if (chr_result >= 0) // nl trouvé
 			*line = ft_strdup("buf contient une nl");
-		if (chr_result == -1) // char trouvé
-			*line = ft_strdup("Buff contient un ou plusieurs char");
+		if (chr_result == -1) // char trouvé sans nl
+		{
+			ft_strjoin_gnl(&*line, *line, buf, BUFFER_SIZE);
+			break ;
+		}
 		if (chr_result == -2) // chaine vide
 			*line = ft_strdup("buf est NULL");
 	}
