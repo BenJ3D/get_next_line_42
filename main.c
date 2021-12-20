@@ -6,11 +6,11 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 17:31:54 by bducrocq          #+#    #+#             */
-/*   Updated: 2021/12/15 17:39:26 by bducrocq         ###   ########.fr       */
+/*   Updated: 2021/12/20 20:23:28 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#define PATH path4
+#define PATH path1
 #include "get_next_line.h"
 // /*fonctions pour changer couleur des print f*/
 void red () { printf("\033[1;31m"); }
@@ -40,23 +40,17 @@ int	main(void)
 		printf("fd : %d\n\n", fd);
 
 	reset();
-	str = get_next_line(fd);
-	//printf("%s", str);
-	// while((str = get_next_line(fd)) != NULL)
-	// {
-	// 	cyan();
-	// 	printf("%.2d |", i);
-	// 	reset();
-	// 	printf("%s", str);
-	// 	free(str);
-	// 	i++;
-	// }
+	while((str = get_next_line(fd)) != NULL && i < 50)
+	{
+		cyan();
+		printf("%.2d |", i);
+		reset();
+		printf("%s", str);
+		free(str);
+		i++;
+	}
 	printf("%s", str);
 	free(str);
 	close(fd);
-	// printf("1er appel :\n%s\n", get_next_line(fd));
-	// printf("2nd appel :\n%s\n", get_next_line(fd));
-	// printf("3me appel :\n%s\n", get_next_line(fd));
-	// printf("4me appel :\n%s\n", get_next_line(fd));
 	return (0);
 }	

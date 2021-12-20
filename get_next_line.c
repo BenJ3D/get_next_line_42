@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 20:00:04 by bducrocq          #+#    #+#             */
-/*   Updated: 2021/12/15 19:11:55 by bducrocq         ###   ########.fr       */
+/*   Updated: 2021/12/20 20:52:33 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	ft_strichr_nl(char *str)	// analyse buff qui peut commencer par des 0
 
 	i = 0;
 
-	if (BUFFER_SIZE == 1 && str[i] != '\n')		//renvoi -3 si nl trouvé avec buffsize a 1
+	if (BUFFER_SIZE == 1 && str[i] == '\n')		//renvoi -3 si nl trouvé avec buffsize a 1 // FIXME:
 		return (-3);
 	i = 0;
 	while (i <= BUFFER_SIZE)  // FIXME:
@@ -37,7 +37,7 @@ int	ft_strichr_nl(char *str)	// analyse buff qui peut commencer par des 0
 	return (-2); // renvoi -2 si completement vide
 }
 
-int	ft_check_is_empty(char *str) //renvoi 1 si non vide
+int	ft_end_of_file(char *str) //renvoi 1 si non vide
 {
 	int	i;
 
@@ -82,19 +82,19 @@ int	ft_read(int	fd, int ret, char *buf, char **line)
 			ft_strjoin_gnl(&*line, *line, buf, BUFFER_SIZE);
 			break ;
 		}
-		if (chr_result >= 0 && ret >= BUFFER_SIZE)
+		if ((chr_result >= 0 || chr_result == -3) && ret >= BUFFER_SIZE)
 		{
-			//*line = ft_strdup("buf contient une nl");
-			break ;
+			ft_strjoin_gnl(&*line, *line, buf, chr_result);
+			ft_buf_process(buf, ret);
+			break ; // FIXME:
 		} // nl trouvé
-		if ((chr_result == -1 || chr_result == -3) && ret >= BUFFER_SIZE) // char trouvé sans nl
+		if (chr_result == -1 && ret >= BUFFER_SIZE) // char trouvé sans nl
 		{
 			ft_strjoin_gnl(&*line, *line, buf, BUFFER_SIZE); // FIXME:
 			ft_buf_process(buf, ret);
 		}
 		if (chr_result == -2 && ret >= BUFFER_SIZE) // chaine vide
 			*line = ft_strdup("buf est NULL");
-		//ft_strjoin_gnl(&*line, *line, buf, BUFFER_SIZE); //TODO: pour la norme supr if au dessus
 	}
 	return(ret);
 }
@@ -102,17 +102,22 @@ int	ft_read(int	fd, int ret, char *buf, char **line)
 char	*get_next_line(int fd)
 {	
 	static char 	buf[BUFFER_SIZE + 1];
-	int				ret;
 	char			*line;
+	int				index_nl;
+	int				ret;
 
+	if (BUFFER_SIZE == 0)
+		return(NULL);
+	index_nl = ft_strichr_nl(buf);
 	line = ft_strdup("");
-	printf("%s\n", line);
-	
-	while(1)
+	if (index_nl >= 0 || index_nl == -1)
 	{
-		ret = ft_read(fd, ret, buf, &line);
-		break;
+		ft_strjoin_gnl(&line, line, buf, index_nl);
+		ft_buf_process(buf, 0);
+		return(line);
 	}
-
+	ret = ft_read(fd, ret, buf, &line);
+	if (ret <= 0)
+		return(NULL);
 	return(line);
 }
