@@ -6,13 +6,24 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 18:33:21 by bducrocq          #+#    #+#             */
-/*   Updated: 2021/12/20 22:23:15 by bducrocq         ###   ########.fr       */
+/*   Updated: 2021/12/20 23:44:06 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static size_t	ft_strlen(char *str)
+static void up_to_char(char **buf2)
+{
+	int	i;
+
+	i = 0;
+	while (*buf2 == '\0' && i < BUFFER_SIZE)  //FIXME: expression result unused [-Wunused-value] pour buf2
+	{
+		*buf2++;
+		i++;
+	}
+}
+size_t	ft_strlen(char *str)
 {
 	size_t	i;
 
@@ -30,12 +41,8 @@ void	ft_strjoin_gnl(char **dst, char *line2, char *buf2, int buf_end)
 	size_t	j;
 	size_t	srcslen;
 
-	i = 0;
-	while (*buf2 == '\0' && i < BUFFER_SIZE)  //FIXME: expression result unused [-Wunused-value] pour buf2
-	{
-		*buf2++;
-		i++;
-	}
+	if(BUFFER_SIZE > 1) // remonte le buf jusquau premier char
+		up_to_char(&buf2);
 	srcslen = ft_strlen(line2);
 	srcslen = srcslen + ft_strlen(buf2);
 	*dst = malloc(sizeof(char) * srcslen + 1);
@@ -49,18 +56,6 @@ void	ft_strjoin_gnl(char **dst, char *line2, char *buf2, int buf_end)
 	dst[0][j] = '\0';
 	free(line2);
  }
-
-void	*ft_calloc(size_t count, size_t size)
-{
-	void	*ptr;
-
-	ptr = malloc(count * size);
-	if (ptr == NULL)
-		return (ptr);
-	//ft_bzero(ptr, size * count);
-	ft_memset(ptr, 0, size * count);
-	return (ptr);
-}
 
 char	*ft_strdup(const char *s1)
 {
@@ -80,12 +75,3 @@ char	*ft_strdup(const char *s1)
 	return (res);
 }
 
-void	*ft_memset(void *b, int c, size_t len)
-{
-	size_t	i;
-
-	i = 0;
-	while (i < len)
-		((char *)b)[i++] = c;
-	return (b);
-}

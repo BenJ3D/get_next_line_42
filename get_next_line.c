@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 20:00:04 by bducrocq          #+#    #+#             */
-/*   Updated: 2021/12/20 23:19:03 by bducrocq         ###   ########.fr       */
+/*   Updated: 2021/12/20 23:58:42 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,12 +103,13 @@ int	ft_buf_process(char *bufp, int ret) // met des zero jusquau \n
 // 	}
 // 	return(ret);
 // }
-int	ft_read(int	fd, int ret, char *buf, char **line)
+int	ft_read(int	fd, int ret2, char *buf, char **line)
 {
 	int	chr_result;
-
+	int	ret; // FIXME: FIXME: !!!!
+	
 	chr_result = -1;
-	while(chr_result < 0)
+	while(chr_result < 0 && ret != 0)
 	{
 		if (ft_strichr_nl(buf) >= 0 || ft_strichr_nl(buf) == -1)
 		{
@@ -118,10 +119,11 @@ int	ft_read(int	fd, int ret, char *buf, char **line)
 		//////
 		ret = read(fd, buf, BUFFER_SIZE);
 		chr_result = ft_strichr_nl(buf);		// return >= 0 pour position \n // -1 si char trouvé sans nl // -2 si vide
-		if (ret < BUFFER_SIZE && *line[0] != '\0') // moins de char lu que buffer_size donc fin de fichier
+		if (ret < BUFFER_SIZE) // moins de char lu que buffer_size donc fin de fichier
 		{
 			ft_strjoin_gnl(&*line, *line, buf, BUFFER_SIZE);
-			return(1); // pour ne pas end of text
+			ft_buf_process(buf, 0);
+			break ;
 		}
 		if ((chr_result >= 0 || chr_result == -3) && ret >= BUFFER_SIZE)
 		{
@@ -135,7 +137,7 @@ int	ft_read(int	fd, int ret, char *buf, char **line)
 			ft_buf_process(buf, ret);
 		}
 		if (chr_result == -2 && ret >= BUFFER_SIZE) // chaine vide
-			*line = ft_strdup("buf est NULL");
+			break ;
 	}
 	return(ret);
 }
@@ -157,9 +159,8 @@ char	*get_next_line(int fd)
 	// 	ft_buf_process(buf, 0);
 	// 	return(line);
 	// }
-	ret = 0;
 	ret = ft_read(fd, ret, buf, &line);
-	if (ret <= 0)
+	if (ft_strlen(buf) < BUFFER_SIZE && ret == 0)
 		return(NULL);
 	return(line);
 }
