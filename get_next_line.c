@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 20:00:04 by bducrocq          #+#    #+#             */
-/*   Updated: 2021/12/20 20:52:33 by bducrocq         ###   ########.fr       */
+/*   Updated: 2021/12/20 22:54:20 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,11 +75,18 @@ int	ft_read(int	fd, int ret, char *buf, char **line)
 	chr_result = -1;
 	while(chr_result < 0)
 	{
+		if (ft_strichr_nl(buf) >= 0 || ft_strichr_nl(buf) == -1)
+		{
+			ft_strjoin_gnl(&*line, *line, buf, BUFFER_SIZE);
+			ft_buf_process(buf, 0);
+		}
+		//////
 		ret = read(fd, buf, BUFFER_SIZE);
 		chr_result = ft_strichr_nl(buf);		// return >= 0 pour position \n // -1 si char trouvé sans nl // -2 si vide
 		if (ret < BUFFER_SIZE) // moins de char lu que buffer_size donc fin de fichier
 		{
 			ft_strjoin_gnl(&*line, *line, buf, BUFFER_SIZE);
+			//free(*line);
 			break ;
 		}
 		if ((chr_result >= 0 || chr_result == -3) && ret >= BUFFER_SIZE)
@@ -90,7 +97,7 @@ int	ft_read(int	fd, int ret, char *buf, char **line)
 		} // nl trouvé
 		if (chr_result == -1 && ret >= BUFFER_SIZE) // char trouvé sans nl
 		{
-			ft_strjoin_gnl(&*line, *line, buf, BUFFER_SIZE); // FIXME:
+			ft_strjoin_gnl(&*line, *line, buf, BUFFER_SIZE); // renvoi -3 si nl trouvé // -1 si char trouvé sans nlFIXME:
 			ft_buf_process(buf, ret);
 		}
 		if (chr_result == -2 && ret >= BUFFER_SIZE) // chaine vide
@@ -103,19 +110,20 @@ char	*get_next_line(int fd)
 {	
 	static char 	buf[BUFFER_SIZE + 1];
 	char			*line;
-	int				index_nl;
+	//int				index_nl;
 	int				ret;
 
 	if (BUFFER_SIZE == 0)
 		return(NULL);
-	index_nl = ft_strichr_nl(buf);
+	//index_nl = ft_strichr_nl(buf);
 	line = ft_strdup("");
-	if (index_nl >= 0 || index_nl == -1)
-	{
-		ft_strjoin_gnl(&line, line, buf, index_nl);
-		ft_buf_process(buf, 0);
-		return(line);
-	}
+	// if (index_nl >= 0 || index_nl == -1) FIXME: move in ft read
+	// {
+	// 	ft_strjoin_gnl(&line, line, buf, index_nl);
+	// 	ft_buf_process(buf, 0);
+	// 	return(line);
+	// }
+	ret = 0;
 	ret = ft_read(fd, ret, buf, &line);
 	if (ret <= 0)
 		return(NULL);

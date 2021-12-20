@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 18:33:21 by bducrocq          #+#    #+#             */
-/*   Updated: 2021/12/20 21:02:20 by bducrocq         ###   ########.fr       */
+/*   Updated: 2021/12/20 22:23:15 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	ft_strjoin_gnl(char **dst, char *line2, char *buf2, int buf_end)
 	size_t	srcslen;
 
 	i = 0;
-	while (*buf2 == '\0' && i < BUFFER_SIZE)
+	while (*buf2 == '\0' && i < BUFFER_SIZE)  //FIXME: expression result unused [-Wunused-value] pour buf2
 	{
 		*buf2++;
 		i++;
@@ -44,7 +44,7 @@ void	ft_strjoin_gnl(char **dst, char *line2, char *buf2, int buf_end)
 	while (line2[i])
 		dst[0][j++] = line2[i++];
 	i = 0;
-	while (buf2[i] && i <= buf_end)
+	while (buf2[i] && i <= (size_t)buf_end)
 		dst[0][j++] = buf2[i++];
 	dst[0][j] = '\0';
 	free(line2);
