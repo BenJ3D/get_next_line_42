@@ -27,7 +27,7 @@
 
 char			*get_next_line(int fd);
 void			ft_strjoin_gnl(char **dst, char *src1, char *src2, int buf_end);
-int				ft_buf_process(char *bufp, int ret);
+int				ft_buf_process(char *bufp);
 int				ft_strichr_nl(char *str);
 //void			*ft_calloc(size_t count, size_t size);
 char			*ft_strdup(const char *s1);

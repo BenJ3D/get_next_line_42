@@ -21,7 +21,7 @@ int	ft_strichr_nl(char *str)	// analyse buff qui peut commencer par des 0
 	if (BUFFER_SIZE == 1 && str[i] == '\n')		//renvoi -3 si nl trouvé avec buffsize a 1 // FIXME:
 		return (-3);
 	i = 0;
-	while (i <= BUFFER_SIZE)  // FIXME:
+	while (i < BUFFER_SIZE)  // FIXME:
 	{
 		if (str[i] == '\n')		//renvoi i si nl trouvé
 			return (i);
@@ -50,21 +50,20 @@ int	ft_end_of_file(char *str) //renvoi 1 si non vide
 	return(1);
 }
 
-int	ft_buf_process(char *bufp, int ret) // met des zero jusquau \n
+int	ft_buf_process(char *bufp) // met des zero jusquau \n
 {
 	int	i;
 
 	i = 0;
 	while (*bufp != '\n')
 	{
-		if (i == BUFFER_SIZE)//FIXME: attention
+		if (i == BUFFER_SIZE) //FIXME: attention
 			break ;
 		*bufp = '\0';
 		bufp++;
 		i++;
 	}
 	*bufp = '\0';
-	ret = ret + 1;  // POUR TRIPUIOLLE FLAG
 	return (0);
 }
 // int	ft_read(int	fd, int ret, char *buf, char **line)
@@ -103,42 +102,67 @@ int	ft_buf_process(char *bufp, int ret) // met des zero jusquau \n
 // 	}
 // 	return(ret);
 // }
-int	ft_read(int	fd, int ret2, char *buf, char **line)
+static int	ft_read(int	fd, int ret2, char *buf, char **line)
 {
 	int	chr_result;
 	int	ret; // FIXME: FIXME: !!!!
-	
-	chr_result = -1;
-	while(chr_result < 0 && ret != 0)
-	{
-		if (ft_strichr_nl(buf) >= 0 || ft_strichr_nl(buf) == -1)
-		{
-			ft_strjoin_gnl(&*line, *line, buf, BUFFER_SIZE);
-			ft_buf_process(buf, 0);
-		}
-		//////
+
+	chr_result = ft_strichr_nl(buf);
+	if (chr_result == -2) // si buf vide, on le rempli
 		ret = read(fd, buf, BUFFER_SIZE);
-		chr_result = ft_strichr_nl(buf);		// return >= 0 pour position \n // -1 si char trouvé sans nl // -2 si vide
-		if (ret < BUFFER_SIZE) // moins de char lu que buffer_size donc fin de fichier
+	chr_result = ft_strichr_nl(buf);
+	while (chr_result < 0 && chr_result != -3 ) // si pas de new line, read et joint jusqua new line
+	{
+		ft_strjoin_gnl(&*line, *line, buf, chr_result);
+		ret = read(fd, buf, BUFFER_SIZE);
+		chr_result = ft_strichr_nl(buf);
+	}
+	ft_strjoin_gnl(&*line, *line, buf, chr_result);
+	return(ret);
+	
+	while(1)  // tant que nl dans buf
+	{
+		if (ret <= 0)
 		{
-			ft_strjoin_gnl(&*line, *line, buf, BUFFER_SIZE);
-			ft_buf_process(buf, 0);
-			break ;
+			*line = ft_strdup("");
+			break;
 		}
-		if ((chr_result >= 0 || chr_result == -3) && ret >= BUFFER_SIZE)
+		if (ret < BUFFER_SIZE)
 		{
 			ft_strjoin_gnl(&*line, *line, buf, chr_result);
-			ft_buf_process(buf, ret);
-			break ; // FIXME:
-		} // nl trouvé
-		if (chr_result == -1 && ret >= BUFFER_SIZE) // char trouvé sans nl
-		{
-			ft_strjoin_gnl(&*line, *line, buf, BUFFER_SIZE); // renvoi -3 si nl trouvé // -1 si char trouvé sans nlFIXME:
-			ft_buf_process(buf, ret);
+			break;
 		}
-		if (chr_result == -2 && ret >= BUFFER_SIZE) // chaine vide
-			break ;
+		chr_result = ft_strichr_nl(buf);
+		if (chr_result <= 0)
+			ft_strjoin_gnl(&*line, *line, buf, chr_result);
+		chr_result = ft_strichr_nl(buf);
+		
+		while(!(ft_strichr_nl(buf) <= 0) && chr_result ) // tant que pas de nl dans buf
+		{
+			ret = read(fd, buf, BUFFER_SIZE);
+			chr_result = ft_strichr_nl(buf);
+			if (ft_strichr_nl(buf) >= 0)
+				ft_strjoin_gnl(&*line, *line, buf, BUFFER_SIZE);
+			//////
+					// return >= 0 pour position \n // -1 si char trouvé sans nl // -2 si vide
+			if (ret < BUFFER_SIZE) // moins de char lu que buffer_size donc fin de fichier
+			{
+				ft_strjoin_gnl(&*line, *line, buf, BUFFER_SIZE);
+				break ;
+			}
+			if ((chr_result >= 0 || chr_result == -3) && ret >= BUFFER_SIZE)
+			{
+				ft_strjoin_gnl(&*line, *line, buf, chr_result);
+				break ; // FIXME:
+			} // nl trouvé
+			if (chr_result == -1 && ret >= BUFFER_SIZE) // char trouvé sans nl
+				ft_strjoin_gnl(&*line, *line, buf, BUFFER_SIZE); // renvoi -3 si nl trouvé // -1 si char trouvé sans nlFIXME:
+			if (chr_result == -2 && ret >= BUFFER_SIZE) // chaine vide
+				break ;
+		}
 	}
+	
+	ft_strjoin_gnl(&*line, *line, buf, BUFFER_SIZE);
 	return(ret);
 }
 

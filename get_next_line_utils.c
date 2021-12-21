@@ -41,7 +41,7 @@ void	ft_strjoin_gnl(char **dst, char *line2, char *buf2, int buf_end)
 	size_t	j;
 	size_t	srcslen;
 
-	if(BUFFER_SIZE > 1) // remonte le buf jusquau premier char
+	if (BUFFER_SIZE > 1) // remonte le buf jusquau premier char
 		up_to_char(&buf2);
 	srcslen = ft_strlen(line2);
 	srcslen = srcslen + ft_strlen(buf2);
@@ -55,6 +55,10 @@ void	ft_strjoin_gnl(char **dst, char *line2, char *buf2, int buf_end)
 		dst[0][j++] = buf2[i++];
 	dst[0][j] = '\0';
 	free(line2);
+	if (BUFFER_SIZE > 1)
+		ft_buf_process(&buf2);
+	else
+		buf2[0] = '\0';
  }
 
 char	*ft_strdup(const char *s1)
