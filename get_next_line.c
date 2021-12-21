@@ -111,7 +111,7 @@ static int	ft_read(int	fd, int ret2, char *buf, char **line)
 	if (chr_result == -2) // si buf vide, on le rempli
 		ret = read(fd, buf, BUFFER_SIZE);
 	chr_result = ft_strichr_nl(buf);
-	while (chr_result < 0 && chr_result != -3 ) // si pas de new line, read et joint jusqua new line
+	while (chr_result < 0 && chr_result != -3 && ret > 0) // si pas de new line, read et joint jusqua new line
 	{
 		ft_strjoin_gnl(&*line, *line, buf, chr_result);
 		ret = read(fd, buf, BUFFER_SIZE);
@@ -184,7 +184,7 @@ char	*get_next_line(int fd)
 	// 	return(line);
 	// }
 	ret = ft_read(fd, ret, buf, &line);
-	if (ft_strlen(buf) < BUFFER_SIZE && ret == 0)
+	if (ft_strlen(line) < BUFFER_SIZE && ret == 0)
 		return(NULL);
 	return(line);
 }
