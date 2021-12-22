@@ -13,7 +13,7 @@
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
+#  define BUFFER_SIZE 1
 # endif
 # include <string.h>
 # include <stdlib.h>
@@ -32,6 +32,7 @@ int				ft_strichr_nl(char *str);
 //void			*ft_calloc(size_t count, size_t size);
 char			*ft_strdup(const char *s1);
 size_t			ft_strlen(char *str);
+void 			ft_up_to_char(char *buf2);
 //void			*ft_memset(void *b, int c, size_t len);
 
 #endif

@@ -12,7 +12,7 @@
 
 #include "get_next_line.h"
 
-static void up_to_char(char **buf2)
+void ft_up_to_char(char *buf2)
 {
 	int	i;
 
@@ -41,11 +41,13 @@ void	ft_strjoin_gnl(char **dst, char *line2, char *buf2, int buf_end)
 	size_t	j;
 	size_t	srcslen;
 
-	if (BUFFER_SIZE > 1) // remonte le buf jusquau premier char
-		up_to_char(&buf2);
+	// if (BUFFER_SIZE > 1) // remonte le buf jusquau premier char
+	// 	up_to_char(&buf2);
 	srcslen = ft_strlen(line2);
-	srcslen = srcslen + ft_strlen(buf2);
+	srcslen = srcslen + (ft_strlen(buf2)/* - (buf_end + 1)*/); // FIXME: bufend fait foirer le malloc
 	*dst = malloc(sizeof(char) * srcslen + 1);
+	if (!dst)
+		*dst = NULL;
 	j = 0;
 	i = 0;
 	while (line2[i])
@@ -56,8 +58,8 @@ void	ft_strjoin_gnl(char **dst, char *line2, char *buf2, int buf_end)
 	dst[0][j] = '\0';
 	free(line2);
 	if (BUFFER_SIZE > 1)
-		ft_buf_process(&buf2);
-	else
+		ft_buf_process(&*buf2);
+	else if (BUFFER_SIZE <= 1)
 		buf2[0] = '\0';
  }
 

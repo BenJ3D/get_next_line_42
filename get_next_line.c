@@ -105,11 +105,15 @@ int	ft_buf_process(char *bufp) // met des zero jusquau \n
 static int	ft_read(int	fd, int ret2, char *buf, char **line)
 {
 	int	chr_result;
-	int	ret; // FIXME: FIXME: !!!!
+	int	ret;
+	int	start_buf;
 
-	chr_result = ft_strichr_nl(buf);
+	chr_result = ft_strichr_nl(buf); // check etat buf 
 	if (chr_result == -2) // si buf vide, on le rempli
 		ret = read(fd, buf, BUFFER_SIZE);
+	//ft_up_to_char(buf);
+	while (*buf == '\0' && start_buf < BUFFER_SIZE)
+		start_buf++;
 	chr_result = ft_strichr_nl(buf);
 	while (chr_result < 0 && chr_result != -3 && ret > 0) // si pas de new line, read et joint jusqua new line
 	{
