@@ -136,6 +136,9 @@ char	*get_next_line(int fd)
 	line = ft_strdup("");
 	ret = ft_read(fd, ret, buf, &line);
 	if (ft_strlen(line) < BUFFER_SIZE && ret == 0)
+	{
+		free(line);
 		return(NULL);
+	}
 	return(line);
 }
