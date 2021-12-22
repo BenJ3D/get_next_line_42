@@ -12,12 +12,11 @@
 
 #include "get_next_line.h"
 
-int	ft_strichr_nl(char *str)	// analyse buff qui peut commencer par des 0
+int	ft_strichr_nl(char *str, size_t ret)	// TODO: ajout ret pour cal bufend en eot analyse buff qui peut commencer par des 0
 {	
-	int	i;
+	size_t	i;
 
 	i = 0;
-
 	if (BUFFER_SIZE == 1 && str[i] == '\n')		//renvoi -3 si nl trouvé avec buffsize a 1 // FIXME:
 		return (-3);
 	i = 0;
@@ -27,27 +26,26 @@ int	ft_strichr_nl(char *str)	// analyse buff qui peut commencer par des 0
 			return (i);
 		i++;
 	}
-	i = 0;
-	while (i < BUFFER_SIZE)
+	if (i != BUFFER_SIZE)
+		i = 0;
+	while (i < BUFFER_SIZE && i != BUFFER_SIZE)
 	{
 		if (str[i] != '\0')		//renvoi -1 si char trouvé
 			return (-1);
 		i++;
 	}
-	return (-2); // renvoi -2 si completement vide
-}
-
-int	ft_end_of_file(char *str) //renvoi 1 si non vide
-{
-	int	i;
-
-	i = 0;
-	while (i <= BUFFER_SIZE)
+	if (ret == BUFFER_SIZE) //TODO: sortir de la fonction
 	{
-		if (str[i] != '\0')
-			return (0);
+		i = BUFFER_SIZE;
+		while (str[i])
+		{
+			i--;
+			if (str[i] != '\0')
+				return(i);
+		}
 	}
-	return(1);
+	while(i <)
+	return (-2); // renvoi -2 si completement vide
 }
 
 int	ft_buf_process(char *bufp) // met des zero jusquau \n
@@ -108,18 +106,18 @@ static int	ft_read(int	fd, int ret2, char *buf, char **line)
 	int	ret;
 	int	start_buf;
 
-	chr_result = ft_strichr_nl(buf); // check etat buf 
+	chr_result = ft_strichr_nl(buf, ret); // check etat buf 
 	if (chr_result == -2) // si buf vide, on le rempli
 		ret = read(fd, buf, BUFFER_SIZE);
-	//ft_up_to_char(buf);
+	// ft_up_to_char(buf);
 	while (*buf == '\0' && start_buf < BUFFER_SIZE)
 		start_buf++;
-	chr_result = ft_strichr_nl(buf);
+	chr_result = ft_strichr_nl(buf, ret);
 	while (chr_result < 0 && chr_result != -3 && ret > 0) // si pas de new line, read et joint jusqua new line
 	{
 		ft_strjoin_gnl(&*line, *line, buf, chr_result);
 		ret = read(fd, buf, BUFFER_SIZE);
-		chr_result = ft_strichr_nl(buf);
+		chr_result = ft_strichr_nl(buf, ret);
 	}
 	ft_strjoin_gnl(&*line, *line, buf, chr_result);
 	return(ret);
@@ -137,8 +135,10 @@ char	*get_next_line(int fd)
 	ret = ft_read(fd, ret, buf, &line);
 	if (ft_strlen(line) < BUFFER_SIZE && ret == 0)
 	{
-		free(line);
+		if (line)
+			free(line);
 		return(NULL);
 	}
 	return(line);
 }
+//TODO: penser a dl strdup // gerer le segfault de fin, voir malloc dans gnl

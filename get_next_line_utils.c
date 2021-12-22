@@ -12,16 +12,14 @@
 
 #include "get_next_line.h"
 
-void ft_up_to_char(char *buf2)
+static size_t ft_find_start(char *buf2)
 {
 	int	i;
 
 	i = 0;
-	while (*buf2 == '\0' && i < BUFFER_SIZE)  //FIXME: expression result unused [-Wunused-value] pour buf2
-	{
-		*buf2++;
+	while (buf2[i] == '\0' && i < BUFFER_SIZE)
 		i++;
-	}
+	return(i);
 }
 size_t	ft_strlen(char *str)
 {
@@ -35,27 +33,29 @@ size_t	ft_strlen(char *str)
 	return (i);
 }
 
-void	ft_strjoin_gnl(char **dst, char *line2, char *buf2, int buf_end)
+void	ft_strjoin_gnl(char **dst, char *line2, char *buf2, size_t buf_end)
  {
 	size_t	i;
 	size_t	j;
 	size_t	srcslen;
+	size_t	start;
 
-	// if (BUFFER_SIZE > 1) // remonte le buf jusquau premier char
-	// 	up_to_char(&buf2);
+	start = ft_find_start(buf2);
 	srcslen = ft_strlen(line2);
-	srcslen = srcslen + (ft_strlen(buf2)/* - (buf_end + 1)*/); // FIXME: bufend fait foirer le malloc
-	*dst = malloc(sizeof(char) * srcslen + 1);
+	srcslen = srcslen + ((buf_end) - start); //FIXME: bufend +1 DL
+	// srcslen = srcslen + (ft_strlen(buf2)/* - (buf_end + 1)*/); // FIXME: bufend fait foirer le malloc
+	*dst = malloc((sizeof(char) * srcslen) + 5); //TODO: pourquoi +8 sinon free invalid
 	if (!dst)
 		*dst = NULL;
 	j = 0;
 	i = 0;
 	while (line2[i])
 		dst[0][j++] = line2[i++];
-	i = 0;
+	i = start;
 	while (buf2[i] && i <= (size_t)buf_end)
 		dst[0][j++] = buf2[i++];
 	dst[0][j] = '\0';
+//	if(line2);
 	free(line2);
 	if (BUFFER_SIZE > 1)
 		ft_buf_process(&*buf2);

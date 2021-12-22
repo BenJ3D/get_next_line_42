@@ -13,7 +13,7 @@
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1
+#  define BUFFER_SIZE 5000
 # endif
 # include <string.h>
 # include <stdlib.h>
@@ -23,16 +23,12 @@
 # include <sys/types.h>
 # include <sys/uio.h>	
 # include <unistd.h>
-//# include "./includes/libft.h"
 
 char			*get_next_line(int fd);
-void			ft_strjoin_gnl(char **dst, char *src1, char *src2, int buf_end);
+void			ft_strjoin_gnl(char **dst, char *src1, char *src2, size_t buf_end);
 int				ft_buf_process(char *bufp);
-int				ft_strichr_nl(char *str);
-//void			*ft_calloc(size_t count, size_t size);
+int				ft_strichr_nl(char *str, size_t ret);
 char			*ft_strdup(const char *s1);
 size_t			ft_strlen(char *str);
-void 			ft_up_to_char(char *buf2);
-//void			*ft_memset(void *b, int c, size_t len);
 
 #endif
