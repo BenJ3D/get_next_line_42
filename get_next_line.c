@@ -44,7 +44,7 @@ int	ft_strichr_nl(char *str, size_t ret)	// TODO: ajout ret pour cal bufend en e
 				return(i);
 		}
 	}
-	while(i <)
+	//while(i <)
 	return (-2); // renvoi -2 si completement vide
 }
 
@@ -109,7 +109,10 @@ static int	ft_read(int	fd, int ret2, char *buf, char **line)
 	chr_result = ft_strichr_nl(buf, ret); // check etat buf 
 	if (chr_result == -2) // si buf vide, on le rempli
 		ret = read(fd, buf, BUFFER_SIZE);
-	// ft_up_to_char(buf);
+	start_buf = 0;
+	while (*buf == '\0' && start_buf++ < BUFFER_SIZE)
+		*buf++;
+	start_buf = 0;
 	while (*buf == '\0' && start_buf < BUFFER_SIZE)
 		start_buf++;
 	chr_result = ft_strichr_nl(buf, ret);
@@ -141,4 +144,4 @@ char	*get_next_line(int fd)
 	}
 	return(line);
 }
-//TODO: penser a dl strdup // gerer le segfault de fin, voir malloc dans gnl
+//TODO: penser a protege strdup // gerer le segfault de fin, voir malloc dans gnl
