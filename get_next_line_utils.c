@@ -55,8 +55,8 @@ void	ft_strjoin_gnl(char **dst, char *line2, char *buf2, size_t buf_end)
 	while (buf2[i] && i <= (size_t)buf_end)
 		dst[0][j++] = buf2[i++];
 	dst[0][j] = '\0';
-	if(line2);
-		free(line2);  FIXME:
+	if (line2)
+		free (line2);
 	if (BUFFER_SIZE > 1)
 		ft_buf_process(&*buf2);
 	else if (BUFFER_SIZE <= 1)
