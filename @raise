@@ -1,0 +1,57 @@
+; id = {0x00000507}, range = [0x00000000000460c0-0x00000000000461c9), name="raise"
+; Source location: unknown
+7FFFF7E130C0: F3 0F 1E FA                endbr64 
+7FFFF7E130C4: 48 81 EC 18 01 00 00       subq   $0x118, %rsp  ; imm = 0x118 
+7FFFF7E130CB: 41 89 F8                   movl   %edi, %r8d
+7FFFF7E130CE: 31 FF                      xorl   %edi, %edi
+7FFFF7E130D0: 66 0F 6F 05 08 97 17 00    movdqa 0x179708(%rip), %xmm0
+7FFFF7E130D8: 64 48 8B 04 25 28 00 00 >  movq   %fs:0x28, %rax
+7FFFF7E130E1: 48 89 84 24 08 01 00 00    movq   %rax, 0x108(%rsp)
+7FFFF7E130E9: 31 C0                      xorl   %eax, %eax
+7FFFF7E130EB: 49 89 E1                   movq   %rsp, %r9
+7FFFF7E130EE: B8 0E 00 00 00             movl   $0xe, %eax
+7FFFF7E130F3: 48 8D B4 24 80 00 00 00    leaq   0x80(%rsp), %rsi
+7FFFF7E130FB: 0F 29 84 24 80 00 00 00    movaps %xmm0, 0x80(%rsp)
+7FFFF7E13103: 66 0F 76 C0                pcmpeqd %xmm0, %xmm0
+7FFFF7E13107: 41 BA 08 00 00 00          movl   $0x8, %r10d
+7FFFF7E1310D: 4C 89 CA                   movq   %r9, %rdx
+7FFFF7E13110: 0F 29 84 24 90 00 00 00    movaps %xmm0, 0x90(%rsp)
+7FFFF7E13118: 0F 29 84 24 A0 00 00 00    movaps %xmm0, 0xa0(%rsp)
+7FFFF7E13120: 0F 29 84 24 B0 00 00 00    movaps %xmm0, 0xb0(%rsp)
+7FFFF7E13128: 0F 29 84 24 C0 00 00 00    movaps %xmm0, 0xc0(%rsp)
+7FFFF7E13130: 0F 29 84 24 D0 00 00 00    movaps %xmm0, 0xd0(%rsp)
+7FFFF7E13138: 0F 29 84 24 E0 00 00 00    movaps %xmm0, 0xe0(%rsp)
+7FFFF7E13140: 0F 29 84 24 F0 00 00 00    movaps %xmm0, 0xf0(%rsp)
+7FFFF7E13148: 0F 05                      syscall 
+7FFFF7E1314A: B9 27 00 00 00             movl   $0x27, %ecx
+7FFFF7E1314F: 89 C8                      movl   %ecx, %eax
+7FFFF7E13151: 0F 05                      syscall 
+7FFFF7E13153: 48 89 C7                   movq   %rax, %rdi
+7FFFF7E13156: B8 BA 00 00 00             movl   $0xba, %eax
+7FFFF7E1315B: 0F 05                      syscall 
+7FFFF7E1315D: 89 C6                      movl   %eax, %esi
+7FFFF7E1315F: 44 89 C2                   movl   %r8d, %edx
+7FFFF7E13162: B8 EA 00 00 00             movl   $0xea, %eax
+7FFFF7E13167: 0F 05                      syscall 
+7FFFF7E13169: 48 3D 00 F0 FF FF          cmpq   $-0x1000, %rax  ; imm = 0xF000 
+7FFFF7E1316F: 77 3F                      ja     0x7ffff7e131b0  ; <+240>
+7FFFF7E13171: 41 89 C0                   movl   %eax, %r8d
+7FFFF7E13174: 41 BA 08 00 00 00          movl   $0x8, %r10d
+7FFFF7E1317A: 31 D2                      xorl   %edx, %edx
+7FFFF7E1317C: 4C 89 CE                   movq   %r9, %rsi
+7FFFF7E1317F: BF 02 00 00 00             movl   $0x2, %edi
+7FFFF7E13184: B8 0E 00 00 00             movl   $0xe, %eax
+7FFFF7E13189: 0F 05                      syscall 
+7FFFF7E1318B: 48 8B 84 24 08 01 00 00    movq   0x108(%rsp), %rax
+7FFFF7E13193: 64 48 33 04 25 28 00 00 >  xorq   %fs:0x28, %rax
+7FFFF7E1319C: 75 26                      jne    0x7ffff7e131c4  ; <+260>
+7FFFF7E1319E: 44 89 C0                   movl   %r8d, %eax
+7FFFF7E131A1: 48 81 C4 18 01 00 00       addq   $0x118, %rsp  ; imm = 0x118 
+7FFFF7E131A8: C3                         retq   
+7FFFF7E131A9: 0F 1F 80 00 00 00 00       nopl   (%rax)
+7FFFF7E131B0: 48 8B 15 B9 4C 1A 00       movq   0x1a4cb9(%rip), %rdx
+7FFFF7E131B7: F7 D8                      negl   %eax
+7FFFF7E131B9: 41 B8 FF FF FF FF          movl   $0xffffffff, %r8d  ; imm = 0xFFFFFFFF 
+7FFFF7E131BF: 64 89 02                   movl   %eax, %fs:(%rdx)
+7FFFF7E131C2: EB B0                      jmp    0x7ffff7e13174  ; <+180>
+7FFFF7E131C4: E8 37 C9 0E 00             callq  0x7ffff7effb00  ; __stack_chk_fail
