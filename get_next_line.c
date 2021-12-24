@@ -82,12 +82,14 @@ static int	ft_read(int	fd, int ret2, char *buf, char **line)
 		ret2 = read(fd, buf, BUFFER_SIZE);
 		chr_result = ft_strichr_nl(buf, ret2);
 	}
-	if(ret2 == 0)
+	if(ret2 == 0 && start_buf != BUFFER_SIZE)  // FIXME: pour segfaut de une ligne
 		return (0);
 	if (chr_result == -3)
 		chr_result = 1;
 	if (chr_result == -2) // buf est vide
 		chr_result = ft_strlen(*line) * 2; // FIXME: = startbuf
+	if(ret2 == 0 && (!(*line)))  // FIXME: pour segfaut de une ligne
+		return (0);
 	ft_strjoin_gnl(&*line, *line, buf, chr_result);
 	return(ret2);
 }
@@ -104,7 +106,7 @@ char	*get_next_line(int fd)
 		return (NULL);
 	line = ft_strdup("");
 	ret = 0;
-	ft_read(fd, ret, buf, &line);
+	ret = ft_read(fd, ret, buf, &line);
 	ret = ft_strlen(line);
 	if (ret == 0)
 	{
@@ -114,4 +116,4 @@ char	*get_next_line(int fd)
 	}
 	return(line);
 }
-//TODO:  penser a protege strdup // gerer le segfault de fin, voir malloc dans gnl
+//TODO:  // gerer le segfault de fin, voir malloc dans gnl
