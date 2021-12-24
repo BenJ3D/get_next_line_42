@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#define PATH path3
+#define PATH path2
 #include "get_next_line.h"
 
 // /*fonctions pour changer couleur des print f*/
@@ -41,7 +41,7 @@ int	main(void)
 	// 	printf("fd : %d\n\n", fd);
 
 	// reset();
-	while((str = get_next_line(fd)) != NULL && i < 50)
+	while((str = get_next_line(fd)) != NULL)
 	{
 		// cyan();
 		// printf("%.2d |", i);
