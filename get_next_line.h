@@ -13,7 +13,7 @@
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 433
+#  define BUFFER_SIZE 23
 # endif
 # include <string.h>
 # include <stdlib.h>
