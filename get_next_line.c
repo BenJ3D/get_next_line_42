@@ -98,8 +98,10 @@ char	*get_next_line(int fd)
 	char			*line;
 	int				ret;
 
+	if (read(fd, buf, 0) < 0)
+		return (NULL);
 	if (BUFFER_SIZE == 0 || fd < 0)
-		return(NULL);
+		return (NULL);
 	line = ft_strdup("");
 	ret = 0;
 	ft_read(fd, ret, buf, &line);
