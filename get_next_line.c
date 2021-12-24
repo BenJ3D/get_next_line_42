@@ -110,4 +110,4 @@ char	*get_next_line(int fd)
 	}
 	return(line);
 }
-//TODO: penser a protege strdup // gerer le segfault de fin, voir malloc dans gnl
+//TODO:  penser a protege strdup // gerer le segfault de fin, voir malloc dans gnl
