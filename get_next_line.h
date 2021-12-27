@@ -30,5 +30,6 @@ int				ft_buf_process(char *bufp);
 int				ft_strichr_nl(char *str, size_t ret);
 char			*ft_strdup(const char *s1);
 size_t			ft_strlen(char *str);
+void			*ft_memset(void *b, int c, size_t len);
 
 #endif

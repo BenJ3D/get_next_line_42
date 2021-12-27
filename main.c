@@ -53,7 +53,7 @@ int	main(void)
 		i++;
 	}
 	// str = get_next_line(fd);
-	// printf("%s", str);
+	printf("%s", str);
 	// str = get_next_line(fd);
 	// printf("%s", str);
 	// str = get_next_line(fd);
