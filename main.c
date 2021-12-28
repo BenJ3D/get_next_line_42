@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 17:31:54 by bducrocq          #+#    #+#             */
-/*   Updated: 2021/12/28 16:12:46 by bducrocq         ###   ########.fr       */
+/*   Updated: 2021/12/28 17:13:35 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,17 +62,17 @@ void true_test(int fd, char *str)
 int	main(void)
 {
 	int			fd;
-	char	path2[] = "./bible.txt";
-	char	path3[] = "./a";
+	//char	path2[] = "./bible.txt";
+	//char	path3[] = "./a";
 	char	path1[] = "./42";
-	char	path4[] = "./bigline";
-	int	i = 1; // compte les lignes
-	char *str;
+	//char	path4[] = "./bigline";
+	//int	i = 1; // compte les lignes
+	//char *str;
 
 	fd = open(PATH, O_RDONLY);
 	// fd = 2;
 
-	//test_debug_with_printf(fd, PATH);
-	true_test(fd, PATH);
+	test_debug_with_printf(fd, PATH);
+	//true_test(fd, PATH);
 	return (0);
 }	

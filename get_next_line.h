@@ -6,14 +6,14 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 19:56:31 by bducrocq          #+#    #+#             */
-/*   Updated: 2021/12/28 16:13:17 by bducrocq         ###   ########.fr       */
+/*   Updated: 2021/12/28 16:31:10 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1
+#  define BUFFER_SIZE 1000000
 # endif
 # include <string.h>
 # include <stdlib.h>
@@ -30,6 +30,5 @@ int				ft_buf_process(char *bufp);
 int				ft_strichr_nl(char *str, size_t ret);
 char			*ft_strdup(const char *s1);
 size_t			ft_strlen(char *str);
-void			*ft_memset(void *b, int c, size_t len);
 
 #endif
