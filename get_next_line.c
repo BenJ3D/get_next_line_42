@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 20:00:04 by bducrocq          #+#    #+#             */
-/*   Updated: 2021/12/28 01:51:09 by bducrocq         ###   ########.fr       */
+/*   Updated: 2021/12/28 01:58:39 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,8 +104,8 @@ char	*get_next_line(int fd)
 	char			*line;
 	int				ret;
 
-	// if (read(fd, buf, 0) < 0)
-	// 	return (NULL);
+	 if (read(fd, buf, 0) < 0)
+		return (NULL);
 	if (BUFFER_SIZE == 0 || fd < 0)
 		return (NULL);
 	line = ft_strdup("");
