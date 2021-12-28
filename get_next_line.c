@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 20:00:04 by bducrocq          #+#    #+#             */
-/*   Updated: 2021/12/28 17:25:43 by bducrocq         ###   ########.fr       */
+/*   Updated: 2021/12/28 17:26:45 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static int	ft_read(int	fd, int ret2, char *buf, char **line)
 	int	start_buf;
 	
 	chr_result = ft_strichr_nl(buf, ret2); // check etat buf 
-	if (chr_result == -2) // si buf vide, on le rempli
+	if (chr_result == -2) // si buf vide, on le rempli	
 		ret2 = read(fd, buf, BUFFER_SIZE);
 	start_buf = 0;
 	while (*buf == '\0' && start_buf < BUFFER_SIZE)
