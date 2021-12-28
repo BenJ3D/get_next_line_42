@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 20:00:04 by bducrocq          #+#    #+#             */
-/*   Updated: 2021/12/28 17:26:45 by bducrocq         ###   ########.fr       */
+/*   Updated: 2021/12/28 19:26:06 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_strichr_nl(char *str, size_t ret)
 	if (BUFFER_SIZE == 1 && str[0] == '\n')		//renvoi -3 si nl trouvé avec buffsize a 1 // FIXME:
 		return (-3);
 	i = 0;
-	while (i < BUFFER_SIZE)
+	while (str[i])
 	{
 		if (str[i] == '\n')		//renvoi i si nl trouvé
 			return (i);
@@ -41,60 +41,35 @@ int	ft_buf_process(char *bufp) // met des zero jusquau \n
 	size_t	i;
 	size_t	j;
 
-
+	j = 0;
+	while (bufp[j++] != '\n' && j <= BUFFER_SIZE)
 	i = 0;
-	// while (*bufp != '\n')
-	// {
-	// 	if (i == BUFFER_SIZE) //FIXME: attention
-	// 		break ;
-	// 	*bufp = '\0';
-	// 	bufp++;
-	// 	i++;
-	// }
-	// *bufp = '\0';
-	while (bufp[j] != '\n')
-	
-	i = 0;
-	while (src[i] && i < size - 1)
-	{
-		dest[i] = src[i];
-		i++;
-	}
-	dest[i] = '\0';
+	while (j <= BUFFER_SIZE)
+		bufp[i++] = bufp[j++];
+	bufp[i] = '\0';
 	return (0);
 }
 
 static int	ft_read(int	fd, int ret2, char *buf, char **line)
 {
 	int	chr_result;
-	int	start_buf;
 	
-	chr_result = ft_strichr_nl(buf, ret2); // check etat buf 
-	if (chr_result == -2) // si buf vide, on le rempli	
+	if (ft_strlen(buf) == 0) // si buf vide, on le rempli	
 		ret2 = read(fd, buf, BUFFER_SIZE);
-	start_buf = 0;
-	while (*buf == '\0' && start_buf < BUFFER_SIZE)
-		start_buf++;
-	chr_result = ft_strichr_nl(buf, ret2); // check etat buf 
+	chr_result = ft_strichr_nl(buf, ret2); // renvoi 0+ si nl trouvé
 	while ((chr_result < 0 && chr_result != -3 && ret2 > 0) || chr_result == -1) // si pas de new line, read et joint jusqua new line
 	{
 		if (chr_result == -1)
-			chr_result = BUFFER_SIZE;
+			chr_result = ft_strlen(buf);
 		ft_strjoin_gnl(&*line, *line, buf, chr_result);
 		ret2 = read(fd, buf, BUFFER_SIZE);
 		chr_result = ft_strichr_nl(buf, ret2);
+		if (ret2 == 0)
+			return(ret2);
 	}
-	if(ret2 == 0 && start_buf != BUFFER_SIZE)  // FIXME: pour segfaut de une ligne
+	if (ft_strlen(*line) < 0) // buf est vide
 		return (0);
-	if (chr_result == -3)
-		chr_result = 1;
-	if (chr_result == -2) // buf est vide
-	{
-		chr_result = ft_strlen(*line); // FIXME: = startbuf
-		if (chr_result != 0)
-			return (0);
-	}
-	if(ret2 == 0 && chr_result == 0)  // FIXME: pour segfaut de une ligne
+	if(ret2 == 0 && chr_result == -2)  // FIXME: pour segfaut de une ligne
 		return (0);
 	ft_strjoin_gnl(&*line, *line, buf, chr_result);
 	return(ret2);

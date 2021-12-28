@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 17:31:54 by bducrocq          #+#    #+#             */
-/*   Updated: 2021/12/28 17:13:35 by bducrocq         ###   ########.fr       */
+/*   Updated: 2021/12/28 19:22:32 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,17 +55,21 @@ void true_test(int fd, char *str)
 		printf("%s", str);
 		free(str);
 	}
+	printf("%s", str);
 	free(str);
-	close(fd);
 	
 }
 int	main(void)
 {
 	int			fd;
 	//char	path2[] = "./bible.txt";
-	//char	path3[] = "./a";
+	char	path3[] = "./a";
 	char	path1[] = "./42";
 	//char	path4[] = "./bigline";
+	// char	pathGNL[] = "./gnlTester/files/41_with_nl";
+	char	pathGNL[] = "./gnlTester/files/41_with_nl";
+	// char	pathGNL[] = "./gnlTester/files/multiple_nlx5";
+	
 	//int	i = 1; // compte les lignes
 	//char *str;
 
@@ -74,5 +78,6 @@ int	main(void)
 
 	test_debug_with_printf(fd, PATH);
 	//true_test(fd, PATH);
+	close(fd);
 	return (0);
 }	

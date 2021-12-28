@@ -6,21 +6,21 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 18:33:21 by bducrocq          #+#    #+#             */
-/*   Updated: 2021/12/28 16:58:58 by bducrocq         ###   ########.fr       */
+/*   Updated: 2021/12/28 19:21:51 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static size_t ft_find_start(char *buf2)
-{
-	int	i;
+// static size_t ft_find_start(char *buf2)
+// {
+// 	int	i;
 
-	i = 0;
-	while (buf2[i] == '\0' && i < BUFFER_SIZE)
-		i++;
-	return(i);
-}
+// 	i = 0;
+// 	while (buf2[i] == '\0' && i < BUFFER_SIZE)
+// 		i++;
+// 	return(i);
+// }
 
 size_t	ft_strlen(char *str)
 {
@@ -41,19 +41,19 @@ void	ft_strjoin_gnl(char **dst, char *line2, char *buf2, size_t buf_end)
 	size_t	i;
 	size_t	j;
 	size_t	srcslen;
-	size_t	start;
 
-	start = ft_find_start(buf2);
+	if (buf_end == -3)
+		buf_end = 1;
 	srcslen = ft_strlen(line2);
-	srcslen = srcslen + ((buf_end + 1) - start); //FIXME: bufend +1 DL
-	*dst = malloc((sizeof(char) * srcslen) + 1); //TODO: pourquoi +8 sinon free invalid
+	srcslen = srcslen + ((buf_end + 1));
+	*dst = malloc((sizeof(char) * srcslen) + 1);
 	if (!dst)
 		*dst = NULL;
 	j = 0;
 	i = 0;
 	while (line2[i])
 		dst[0][j++] = line2[i++];
-	i = start;
+	i = 0;
 	while (buf2[i] && i <= (size_t)buf_end)
 		dst[0][j++] = buf2[i++];
 	dst[0][j] = '\0';
