@@ -6,21 +6,11 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 18:33:21 by bducrocq          #+#    #+#             */
-/*   Updated: 2021/12/28 19:21:51 by bducrocq         ###   ########.fr       */
+/*   Updated: 2021/12/28 19:58:00 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
-// static size_t ft_find_start(char *buf2)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (buf2[i] == '\0' && i < BUFFER_SIZE)
-// 		i++;
-// 	return(i);
-// }
 
 size_t	ft_strlen(char *str)
 {
@@ -30,9 +20,7 @@ size_t	ft_strlen(char *str)
 	if (!str)
 		return (0);
 	while (str[i])
-	{
 		i++;
-	}
 	return (i);
 }
 
@@ -42,7 +30,7 @@ void	ft_strjoin_gnl(char **dst, char *line2, char *buf2, size_t buf_end)
 	size_t	j;
 	size_t	srcslen;
 
-	if (buf_end == -3)
+	if ((long)buf_end == -3)
 		buf_end = 1;
 	srcslen = ft_strlen(line2);
 	srcslen = srcslen + ((buf_end + 1));

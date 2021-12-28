@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 20:00:04 by bducrocq          #+#    #+#             */
-/*   Updated: 2021/12/28 19:26:06 by bducrocq         ###   ########.fr       */
+/*   Updated: 2021/12/28 20:32:10 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,15 @@ static int	ft_read(int	fd, int ret2, char *buf, char **line)
 		ft_strjoin_gnl(&*line, *line, buf, chr_result);
 		ret2 = read(fd, buf, BUFFER_SIZE);
 		chr_result = ft_strichr_nl(buf, ret2);
-		if (ret2 == 0)
+		if (ret2 < BUFFER_SIZE)
+		{
+			buf[ret2] = '\0';
 			return(ret2);
+		}
 	}
 	if (ft_strlen(*line) < 0) // buf est vide
 		return (0);
-	if(ret2 == 0 && chr_result == -2)  // FIXME: pour segfaut de une ligne
+	if(ret2 == 0)  // FIXME: pour segfaut de une ligne
 		return (0);
 	ft_strjoin_gnl(&*line, *line, buf, chr_result);
 	return(ret2);
