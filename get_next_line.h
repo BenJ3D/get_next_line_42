@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 19:56:31 by bducrocq          #+#    #+#             */
-/*   Updated: 2021/12/28 21:55:26 by bducrocq         ###   ########.fr       */
+/*   Updated: 2021/12/28 23:18:59 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void			ft_strjoin_gnl(char **dst, char *src1, char *src2, size_t buf_end);
 int				ft_buf_process(char *bufp);
 int				ft_strichr_nl(char *str);
 char			*ft_strdup(const char *s1);
-size_t			ft_strlen(char *str);
+size_t			ft_strlen(const char *str);
 void			*ft_memset(void *b, int c, size_t len);
 
 #endif

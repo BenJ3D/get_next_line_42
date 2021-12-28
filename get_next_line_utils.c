@@ -6,11 +6,20 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 18:33:21 by bducrocq          #+#    #+#             */
-/*   Updated: 2021/12/28 22:10:10 by bducrocq         ###   ########.fr       */
+/*   Updated: 2021/12/28 23:18:33 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+// void	*ft_memset(void *b, int c, size_t len)
+// {
+// 	size_t	i;
+
+// 	i = 0;
+// 	while (i < len)
+// 		((char *)b)[i++] = c;
+// 	return (b);
+// }
 
 static size_t ft_find_start(char *buf2)
 {
@@ -21,15 +30,15 @@ static size_t ft_find_start(char *buf2)
 		i++;
 	return(i);
 }
-size_t	ft_strlen(char *str)
+size_t	ft_strlen(const char *str)
 {
 	size_t	i;
 
 	i = 0;
+	if (!str)
+		return (0);
 	while (str[i])
-	{
 		i++;
-	}
 	return (i);
 }
 
@@ -46,6 +55,7 @@ void	ft_strjoin_gnl(char **dst, char *line2, char *buf2, size_t buf_end)
 	*dst = malloc((sizeof(char) * srcslen) + 1);
 	if (!dst)
 		return;
+	//ft_memset(*dst, 0, srcslen + 1);
 	j = 0;
 	i = 0;
 	while (line2[i])
@@ -66,7 +76,7 @@ char	*ft_strdup(const char *s1)
 {
 	char	*res;
 	size_t	i;
-
+	
 	i = 0;
 	res = malloc(sizeof(char) * (ft_strlen((char *)s1) + 1));
 	if (!res)

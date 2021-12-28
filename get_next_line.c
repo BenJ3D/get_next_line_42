@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 20:00:04 by bducrocq          #+#    #+#             */
-/*   Updated: 2021/12/28 22:22:36 by bducrocq         ###   ########.fr       */
+/*   Updated: 2021/12/28 23:29:53 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,22 +90,27 @@ int	ft_buf_process(char *bufp) // met des zero jusquau \n
 	*bufp = '\0';
 	return (0);
 }
-
-// int	ft_read2(int ret2, int start_buf, int chr_result, char *line)
+// static int	ft_read2()
 // {
-// 	if(ret2 == 0 && start_buf != BUFFER_SIZE)  // FIXME: pour segfaut de une ligne
-// 		return (0);
-// 	if (chr_result == -3)
-// 		chr_result = 1;
-// 	if (chr_result == -2) // buf est vide
-// 	{
-// 		chr_result = ft_strlen(*line); // FIXME: = startbuf
-// 		if (chr_result != 0)
-// 		return (0);
-// 	}
-// 	if(ret2 == 0 && chr_result == 0)  // FIXME: pour segfaut de une ligne
-// 		return (0);
+// 	return (0);
 // }
+
+static int	ft_read2(int ret3, int start_buf2, int *chr_result2, int line_len)
+{
+	if(ret3 == 0 && start_buf2 != BUFFER_SIZE)  // FIXME: pour segfaut de une ligne
+		return (0);
+	if (*chr_result2 == -3)
+		*chr_result2 = 1;
+	if (*chr_result2 == -2) // buf est vide
+	{
+		*chr_result2 = line_len; // FIXME: = startbuf
+		if (*chr_result2 != 0)
+		return (0);
+	}
+	if(ret3 == 0 && *chr_result2 == 0)  // FIXME: pour segfaut de une ligne
+		return (0);
+	return (ret3);
+}
 
 static int	ft_read(int	fd, int ret2, char *buf, char **line)
 {
@@ -127,19 +132,25 @@ static int	ft_read(int	fd, int ret2, char *buf, char **line)
 		ret2 = read(fd, buf, BUFFER_SIZE);
 		chr_result = ft_strichr_nl(buf);
 	}
-	if(ret2 == 0 && start_buf != BUFFER_SIZE)  // FIXME: pour segfaut de une ligne
+
+		/****************************/	
+	// if(ret2 == 0 && start_buf != BUFFER_SIZE)  // FIXME: pour segfaut de une ligne
+	// 	return (0);
+	// if (chr_result == -3)
+	// 	chr_result = 1;
+	// if (chr_result == -2) // buf est vide
+	// {
+	// 	chr_result = ft_strlen(*line); // FIXME: = startbuf
+	// 	if (chr_result != 0)
+	// 	return (0);
+	// }
+	// if(ret2 == 0 && chr_result == 0)  // FIXME: pour segfaut de une ligne
+	// 	return (0);
+		/****************************/
+		
+	if (ft_read2(ret2, start_buf, &chr_result, ft_strlen(*line)) == 0)
 		return (0);
-	if (chr_result == -3)
-		chr_result = 1;
-	if (chr_result == -2) // buf est vide
-	{
-		chr_result = ft_strlen(*line); // FIXME: = startbuf
-		if (chr_result != 0)
-		return (0);
-	}
-	if(ret2 == 0 && chr_result == 0)  // FIXME: pour segfaut de une ligne
-		return (0);
-	//ret2 = ft_read2(ret2, start_buf, chr_result, *line);
+      ////////////////////////////
 	ft_strjoin_gnl(&*line, *line, buf, chr_result);
 	return(ret2);
 }

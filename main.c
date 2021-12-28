@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 17:31:54 by bducrocq          #+#    #+#             */
-/*   Updated: 2021/12/28 16:12:46 by bducrocq         ###   ########.fr       */
+/*   Updated: 2021/12/28 23:24:47 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ int	main(void)
 	char	path3[] = "./a";
 	char	path1[] = "./42";
 	char	path4[] = "./bigline";
+	char	path5[] = "./gnlTester/files/alternate_line_nl_with_nl";
 	int	i = 1; // compte les lignes
 	char *str;
 
