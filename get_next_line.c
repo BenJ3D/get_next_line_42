@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 20:00:04 by bducrocq          #+#    #+#             */
-/*   Updated: 2021/12/20 23:58:42 by bducrocq         ###   ########.fr       */
+/*   Updated: 2021/12/28 01:51:09 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ static int	ft_read(int	fd, int ret2, char *buf, char **line)
 	{
 		chr_result = ft_strlen(*line); // FIXME: = startbuf
 		if (chr_result != 0)
-		return (line);
+		return (0);
 	}
 	if(ret2 == 0 && chr_result == 0)  // FIXME: pour segfaut de une ligne
 		return (0);
