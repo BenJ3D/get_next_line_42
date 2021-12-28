@@ -6,21 +6,11 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 18:33:21 by bducrocq          #+#    #+#             */
-/*   Updated: 2021/12/20 23:44:06 by bducrocq         ###   ########.fr       */
+/*   Updated: 2021/12/28 22:10:10 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
-void	*ft_memset(void *b, int c, size_t len)
-{
-	size_t	i;
-
-	i = 0;
-	while (i < len)
-		((char *)b)[i++] = c;
-	return (b);
-}
 
 static size_t ft_find_start(char *buf2)
 {
@@ -52,11 +42,10 @@ void	ft_strjoin_gnl(char **dst, char *line2, char *buf2, size_t buf_end)
 
 	start = ft_find_start(buf2);
 	srcslen = ft_strlen(line2);
-	srcslen = srcslen + ((buf_end + 1) - start); //FIXME: bufend +1 DL
-	*dst = malloc((sizeof(char) * srcslen) + 1); //TODO: pourquoi +8 sinon free invalid
-	// if (!dst)
-	// 	*dst = NULL;
-	ft_memset(*dst, 0, srcslen + 1);
+	srcslen = srcslen + ((buf_end + 1) - start);
+	*dst = malloc((sizeof(char) * srcslen) + 1);
+	if (!dst)
+		return;
 	j = 0;
 	i = 0;
 	while (line2[i])
