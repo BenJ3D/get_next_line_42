@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 20:00:04 by bducrocq          #+#    #+#             */
-/*   Updated: 2021/12/28 23:29:53 by bducrocq         ###   ########.fr       */
+/*   Updated: 2021/12/30 23:27:28 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 // 	}
 // 	ret = 1;
 // 	return (-2); // renvoi -2 si completement vide
-// }
+// } 
 
 // int	ft_buf_process(char *bufp) // met des zero jusquau \n
 // {
@@ -52,7 +52,7 @@
 
 int	ft_strichr_nl(char *str)	// TODO: ajout ret pour cal bufend en eot analyse buff qui peut commencer par des 0
 {	
-	size_t	i;
+	size_t	i; 
 	size_t	j;
 	
 	if (BUFFER_SIZE == 1 && str[0] == '\n')		//renvoi -3 si nl trouvé avec buffsize a 1 // FIXME:
