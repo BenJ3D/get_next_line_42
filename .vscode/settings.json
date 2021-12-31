@@ -1,7 +1,0 @@
-{
-    "files.associations": {
-        "libft.h": "c",
-        "bitset": "c"
-    },
-    "cmake.configureOnOpen": true
-}

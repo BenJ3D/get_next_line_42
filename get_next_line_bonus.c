@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 20:00:04 by bducrocq          #+#    #+#             */
-/*   Updated: 2021/12/31 02:54:21 by bducrocq         ###   ########.fr       */
+/*   Updated: 2021/12/31 02:39:52 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	ft_buf_process(char *bufp)
 	return (0);
 }
 
-static int	ft_norm_read(int fd, char **buf, int *ret2, char **line)
+int	ft_norm_read(int fd, char **buf, int *ret2, char **line)
 {
 	int	chr_nl;
 
@@ -100,17 +100,17 @@ static int	ft_read(int fd, int ret2, char *buf, char **line)
 
 char	*get_next_line(int fd)
 {	
-	static char		buf[BUFFER_SIZE + 1];
+	static char		buf[1024][BUFFER_SIZE + 1];
 	char			*line;
 	int				ret;
 
-	if (read(fd, buf, 0) < 0)
+	if (read(fd, buf[fd], 0) < 0)
 		return (NULL);
 	if (BUFFER_SIZE == 0 || fd < 0)
 		return (NULL);
 	line = ft_strdup("");
 	ret = 0;
-	ret = ft_read(fd, ret, buf, &line);
+	ret = ft_read(fd, ret, buf[fd], &line);
 	ret = ft_strlen(line);
 	if (ret == 0)
 	{
