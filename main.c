@@ -6,11 +6,11 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 17:31:54 by bducrocq          #+#    #+#             */
-/*   Updated: 2021/12/28 23:24:47 by bducrocq         ###   ########.fr       */
+/*   Updated: 2021/12/31 01:48:51 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#define PATH path1
+#define PATH path5
 #include "get_next_line.h"
 // /*fonctions pour changer couleur des print f*/
 void red () { printf("\033[1;31m"); }
